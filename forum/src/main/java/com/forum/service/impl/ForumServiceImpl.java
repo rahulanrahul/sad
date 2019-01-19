@@ -1,5 +1,6 @@
 package com.forum.service.impl;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -9,12 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 
-import com.forum.model.DiscussionModel;
-import com.forum.service.ForumService;
 import com.forum.dao.CategoryDao;
 import com.forum.dao.ForumDao;
+import com.forum.entity.AnswersEntity;
+import com.forum.entity.QuestionsEntity;
+import com.forum.model.AnswerModel;
+import com.forum.model.DiscussionModel;
+import com.forum.service.ForumService;
 
 @Service
 @Transactional
@@ -28,16 +33,13 @@ public class ForumServiceImpl implements ForumService {
 	public ResponseEntity<List<DiscussionModel>> getDiscussions(String searchString, String category, Integer userId) {
 		ResponseEntity<List<DiscussionModel>> response = null;
 		if (StringUtils.isNotEmpty(searchString) && StringUtils.isEmpty(category) && ObjectUtils.isEmpty(userId)) {
-
 			response = searchOnKeyword(searchString);
-
 		} else if (StringUtils.isEmpty(searchString) && StringUtils.isNotEmpty(category)
 				&& ObjectUtils.isEmpty(userId)) {
-
 			response = searchOnCategory(category);
 
-		} else {
-
+		} else if (StringUtils.isEmpty(searchString) && StringUtils.isEmpty(category) && !ObjectUtils.isEmpty(userId)) {
+			response = searchOnUserId(userId);
 		}
 
 		return response;
@@ -49,12 +51,53 @@ public class ForumServiceImpl implements ForumService {
 		return new ResponseEntity<>(listOfDiscussionModel, HttpStatus.OK);
 	}
 
+	@Override
+	public ResponseEntity<String> postQuestion(DiscussionModel discussionModel) {
+		QuestionsEntity questionEntity = new QuestionsEntity();
+		questionEntity.setQuestionCategoryId(categoryDao.getCategoryIdFromCategoryName(discussionModel.getCategory()));
+		questionEntity.setQuestionCreationDateTime(new Timestamp(System.currentTimeMillis()));
+		questionEntity.setQuestionDescription(discussionModel.getQuestion().trim());
+		questionEntity.setQuestionActive(true);
+		questionEntity.setDiscussionThreadActive(true);
+		questionEntity.setQuestionPostedByUserId(discussionModel.getUserId());
+		forumDao.postQuestions(questionEntity);
+		return new ResponseEntity<>(HttpStatus.CREATED);
+	}
+
+	@Override
+	public ResponseEntity<String> answerQuestion(AnswerModel answerModel) {
+		AnswersEntity answersEntity = new AnswersEntity();
+		answersEntity.setAnswerDescription(answerModel.getAnswer().trim());
+		answersEntity.setAnswerIsActive(true);
+		answersEntity.setQuestionId(answerModel.getQuestionId());
+		answersEntity.setAnswerPostedByUserId(answerModel.getUserId());
+		answersEntity.setAnswerDateTime(new Timestamp(System.currentTimeMillis()));
+		answersEntity.setAnswerPostedByUserId(answerModel.getUserId());
+		if ((!forumDao.getQuestionEntityFromQuestionId(answerModel.getQuestionId()).isDiscussionThreadActive())
+				|| (!forumDao.getQuestionEntityFromQuestionId(answerModel.getQuestionId()).isQuestionActive())) {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		} else {
+			forumDao.postAnswers(answersEntity);
+			return new ResponseEntity<>(HttpStatus.CREATED);
+		}
+	}
+
+	private ResponseEntity<List<DiscussionModel>> searchOnUserId(Integer userId) {
+		List<DiscussionModel> listOfDiscussionModel = forumDao.searchOnUserId(userId);
+		if (CollectionUtils.isEmpty(listOfDiscussionModel)) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} else {
+			return new ResponseEntity<>(listOfDiscussionModel, HttpStatus.OK);
+		}
+	}
+
 	private ResponseEntity<List<DiscussionModel>> searchOnKeyword(String searchString) {
-		// List<DiscussionModel> listOfDiscussionModel =
-		// discussionDao.searchOnKeyword(searchString);
-		// checkIfCollectionIsEmpty(listOfDiscussionModel);
-		// return new ResponseEntity<>(listOfDiscussionModel, HttpStatus.OK);
-		return null;
+		List<DiscussionModel> listOfDiscussionModel = forumDao.searchOnKeyword(searchString);
+		if (CollectionUtils.isEmpty(listOfDiscussionModel)) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} else {
+			return new ResponseEntity<>(listOfDiscussionModel, HttpStatus.OK);
+		}
 	}
 
 	@Override

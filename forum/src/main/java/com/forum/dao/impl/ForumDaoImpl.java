@@ -6,10 +6,10 @@ import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.persistence.metamodel.EntityType;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -36,6 +36,58 @@ public class ForumDaoImpl implements ForumDao {
 		List<QuestionsEntity> listOfQuestionsWithGivenCategory = session.createQuery(criteriaQuery).getResultList();
 		return getListOfDiscussionModelFromQuestionsEntity(listOfQuestionsWithGivenCategory);
 
+	}
+
+	@Override
+	public void postQuestions(QuestionsEntity questionEntity) {
+		Session session = sessionFactory.getCurrentSession();
+		session.save(questionEntity);
+	}
+
+	@Override
+	public void postAnswers(AnswersEntity answersEntity) {
+		Session session = sessionFactory.getCurrentSession();
+		session.save(answersEntity);
+	}
+
+	public List<DiscussionModel> searchOnKeyword(String searchString) {
+		Session session = sessionFactory.getCurrentSession();
+		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+		CriteriaQuery<QuestionsEntity> criteriaQuery = criteriaBuilder.createQuery(QuestionsEntity.class);
+		Root<QuestionsEntity> questionsRoot = criteriaQuery.from(QuestionsEntity.class);
+		criteriaQuery.select(questionsRoot);
+		EntityType<QuestionsEntity> type = session.getMetamodel().entity(QuestionsEntity.class);
+		criteriaQuery.where(
+				criteriaBuilder.like(
+						criteriaBuilder.lower(questionsRoot
+								.get(type.getDeclaredSingularAttribute("questionDescription", String.class))),
+						"%" + searchString.toLowerCase() + "%"),
+				criteriaBuilder.equal(questionsRoot.get("isQuestionActive"), true));
+		List<QuestionsEntity> listOfQuestionsWithGivenSearchString = session.createQuery(criteriaQuery).getResultList();
+		return getListOfDiscussionModelFromQuestionsEntity(listOfQuestionsWithGivenSearchString);
+	}
+
+	public List<DiscussionModel> searchOnUserId(Integer userId) {
+		Session session = sessionFactory.getCurrentSession();
+		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+		CriteriaQuery<QuestionsEntity> criteriaQuery = criteriaBuilder.createQuery(QuestionsEntity.class);
+		Root<QuestionsEntity> questionsRoot = criteriaQuery.from(QuestionsEntity.class);
+		criteriaQuery.select(questionsRoot);
+		criteriaQuery.where(criteriaBuilder.equal(questionsRoot.get("questionPostedByUserId"), userId),
+				criteriaBuilder.equal(questionsRoot.get("isQuestionActive"), true));
+		List<QuestionsEntity> listOfQuestionsWithUserId = session.createQuery(criteriaQuery).getResultList();
+		return getListOfDiscussionModelFromQuestionsEntity(listOfQuestionsWithUserId);
+	}
+
+	@Override
+	public QuestionsEntity getQuestionEntityFromQuestionId(int questionId) {
+		Session session = sessionFactory.getCurrentSession();
+		return getQuestionEntity(questionId, session);
+	}
+
+	private QuestionsEntity getQuestionEntity(Integer questionId, Session session) {
+		QuestionsEntity questionEntity = session.get(QuestionsEntity.class, questionId);
+		return questionEntity;
 	}
 
 	private List<DiscussionModel> getListOfDiscussionModelFromQuestionsEntity(
