@@ -24,7 +24,7 @@ public class ForumController {
 	}
 
 	@GetMapping("/login-verification")
-	public ResponseEntity<String> detailedSearch(@RequestParam (required = false)  String userName, @RequestParam (required = false)  String password) {
+	public ResponseEntity<String> verifyUser(@RequestParam (required = false)  String userName, @RequestParam (required = false)  String password) {
 		return forumService.verifyUser(userName, password);
 	}
 }
