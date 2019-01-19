@@ -1,0 +1,17 @@
+com\forum\model\UserDetailsModel.class
+com\forum\dao\CategoryDao.class
+com\forum\service\ForumService.class
+com\forum\entity\QuestionsEntity.class
+com\forum\dao\ForumDao.class
+com\forum\model\AnswerModel.class
+com\forum\service\impl\ForumServiceImpl.class
+com\forum\ForumApp.class
+com\forum\entity\UserDetailsEntity.class
+com\forum\entity\DepartmentEntity.class
+com\forum\HibernateConfiguration.class
+com\forum\dao\impl\CategoryDaoImpl.class
+com\forum\controller\ForumController.class
+com\forum\dao\impl\ForumDaoImpl.class
+com\forum\model\DiscussionModel.class
+com\forum\entity\AnswersEntity.class
+com\forum\entity\CategoryEntity.class
