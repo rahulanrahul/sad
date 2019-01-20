@@ -99,6 +99,16 @@ public class ForumServiceImpl implements ForumService {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
+	@Override
+	public ResponseEntity<String> delete(Integer questionId, Integer answerId) {
+		if (!(ObjectUtils.isEmpty(questionId))) {
+			forumDao.deleteQuestion(questionId);
+		} else {
+			forumDao.deleteAnswer(answerId);
+		}
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
 	private ResponseEntity<List<DiscussionModel>> searchOnUserId(Integer userId) {
 		List<DiscussionModel> listOfDiscussionModel = forumDao.searchOnUserId(userId);
 		if (CollectionUtils.isEmpty(listOfDiscussionModel)) {

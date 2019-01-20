@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -52,6 +53,12 @@ public class ForumController {
 	@PutMapping("/edit-answer")
 	public ResponseEntity<String> editAnswers(@RequestBody AnswerModel answerModel) {
 		return forumService.editAnswer(answerModel);
+	}
+
+	@DeleteMapping("/delete")
+	public ResponseEntity<String> deleteQuestionsOrAnswers(@RequestParam(required = false) Integer questionId,
+			@RequestParam(required = false) Integer answerId) {
+		return forumService.delete(questionId, answerId);
 	}
 
 }

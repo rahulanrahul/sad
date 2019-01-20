@@ -25,4 +25,8 @@ public interface ForumDao {
 	public void editQuestions(int questionId, Integer categoryId, String question);
 
 	public void editAnswers(int questionId, String answer);
+
+	public void deleteQuestion(Integer questionId);
+
+	public void deleteAnswer(Integer answerId);
 }
