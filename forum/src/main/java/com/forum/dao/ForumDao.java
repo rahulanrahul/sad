@@ -29,4 +29,6 @@ public interface ForumDao {
 	public void deleteQuestion(Integer questionId);
 
 	public void deleteAnswer(Integer answerId);
+
+	public void closeQuestions(Integer questionId);
 }

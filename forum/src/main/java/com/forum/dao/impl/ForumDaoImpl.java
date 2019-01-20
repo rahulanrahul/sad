@@ -118,6 +118,14 @@ public class ForumDaoImpl implements ForumDao {
 		session.update(answersEntity);
 	}
 
+	@Override
+	public void closeQuestions(Integer questionId) {
+		Session session = sessionFactory.getCurrentSession();
+		QuestionsEntity questionEntity = getQuestionEntity(questionId, session);
+		questionEntity.setDiscussionThreadActive(false);
+		session.update(questionEntity);
+	}
+
 	private QuestionsEntity getQuestionEntity(Integer questionId, Session session) {
 		QuestionsEntity questionEntity = session.get(QuestionsEntity.class, questionId);
 		return questionEntity;

@@ -109,6 +109,13 @@ public class ForumServiceImpl implements ForumService {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
+	@Override
+	public ResponseEntity<String> closeQuestion(DiscussionModel questionModel) {
+		int questionId = questionModel.getQuestionId();
+		forumDao.closeQuestions(questionId);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
 	private ResponseEntity<List<DiscussionModel>> searchOnUserId(Integer userId) {
 		List<DiscussionModel> listOfDiscussionModel = forumDao.searchOnUserId(userId);
 		if (CollectionUtils.isEmpty(listOfDiscussionModel)) {

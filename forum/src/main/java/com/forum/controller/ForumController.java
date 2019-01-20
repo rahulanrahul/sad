@@ -61,4 +61,9 @@ public class ForumController {
 		return forumService.delete(questionId, answerId);
 	}
 
+	@PutMapping("/close-question")
+	public ResponseEntity<String> closeQuestions(@RequestBody DiscussionModel questionModel) {
+		return forumService.closeQuestion(questionModel);
+	}
+
 }

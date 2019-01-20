@@ -22,4 +22,6 @@ public interface ForumService {
 	public ResponseEntity<String> editAnswer(AnswerModel answerModel);
 
 	public ResponseEntity<String> delete(Integer questionId, Integer answerId);
+
+	public ResponseEntity<String> closeQuestion(DiscussionModel questionModel);
 }
