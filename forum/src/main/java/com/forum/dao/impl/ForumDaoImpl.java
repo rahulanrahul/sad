@@ -85,9 +85,31 @@ public class ForumDaoImpl implements ForumDao {
 		return getQuestionEntity(questionId, session);
 	}
 
+	@Override
+	public void editQuestions(int questionId, Integer categoryId, String question) {
+		Session session = sessionFactory.getCurrentSession();
+		QuestionsEntity existingQuestionEntity = getQuestionEntity(questionId, session);
+		existingQuestionEntity.setQuestionCategoryId(categoryId);
+		existingQuestionEntity.setQuestionDescription(question);
+		session.update(existingQuestionEntity);
+	}
+
+	@Override
+	public void editAnswers(int answerId, String answer) {
+		Session session = sessionFactory.getCurrentSession();
+		AnswersEntity existingAnswerEntity = getAnswerEntity(answerId, session);
+		existingAnswerEntity.setAnswerDescription(answer);
+		session.update(existingAnswerEntity);
+	}
+
 	private QuestionsEntity getQuestionEntity(Integer questionId, Session session) {
 		QuestionsEntity questionEntity = session.get(QuestionsEntity.class, questionId);
 		return questionEntity;
+	}
+
+	private AnswersEntity getAnswerEntity(Integer answerId, Session session) {
+		AnswersEntity answerEntity = session.get(AnswersEntity.class, answerId);
+		return answerEntity;
 	}
 
 	private List<DiscussionModel> getListOfDiscussionModelFromQuestionsEntity(

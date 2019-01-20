@@ -52,16 +52,25 @@ public class ForumServiceImpl implements ForumService {
 	}
 
 	@Override
-	public ResponseEntity<String> postQuestion(DiscussionModel discussionModel) {
+	public ResponseEntity<String> postQuestion(DiscussionModel questionModel) {
 		QuestionsEntity questionEntity = new QuestionsEntity();
-		questionEntity.setQuestionCategoryId(categoryDao.getCategoryIdFromCategoryName(discussionModel.getCategory()));
+		questionEntity.setQuestionCategoryId(categoryDao.getCategoryIdFromCategoryName(questionModel.getCategory()));
 		questionEntity.setQuestionCreationDateTime(new Timestamp(System.currentTimeMillis()));
-		questionEntity.setQuestionDescription(discussionModel.getQuestion().trim());
+		questionEntity.setQuestionDescription(questionModel.getQuestion().trim());
 		questionEntity.setQuestionActive(true);
 		questionEntity.setDiscussionThreadActive(true);
-		questionEntity.setQuestionPostedByUserId(discussionModel.getUserId());
+		questionEntity.setQuestionPostedByUserId(questionModel.getUserId());
 		forumDao.postQuestions(questionEntity);
 		return new ResponseEntity<>(HttpStatus.CREATED);
+	}
+
+	@Override
+	public ResponseEntity<String> editQuestion(DiscussionModel questionModel) {
+		int questionId = questionModel.getQuestionId();
+		int questionCategory = categoryDao.getCategoryIdFromCategoryName(questionModel.getCategory());
+		String questionDescription = questionModel.getQuestion();
+		forumDao.editQuestions(questionId, questionCategory, questionDescription);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	@Override
@@ -80,6 +89,14 @@ public class ForumServiceImpl implements ForumService {
 			forumDao.postAnswers(answersEntity);
 			return new ResponseEntity<>(HttpStatus.CREATED);
 		}
+	}
+
+	@Override
+	public ResponseEntity<String> editAnswer(AnswerModel answerModel) {
+		int answerId = answerModel.getAnswerId();
+		String answerDescription = answerModel.getAnswer();
+		forumDao.editAnswers(answerId, answerDescription);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	private ResponseEntity<List<DiscussionModel>> searchOnUserId(Integer userId) {

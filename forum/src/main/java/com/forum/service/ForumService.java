@@ -13,7 +13,11 @@ public interface ForumService {
 
 	public ResponseEntity<String> verifyUser(String userName, String password);
 
-	public ResponseEntity<String> postQuestion(DiscussionModel discussionModel);
+	public ResponseEntity<String> postQuestion(DiscussionModel questionModel);
 
 	public ResponseEntity<String> answerQuestion(AnswerModel answerModel);
+
+	public ResponseEntity<String> editQuestion(DiscussionModel questionModel);
+
+	public ResponseEntity<String> editAnswer(AnswerModel answerModel);
 }
