@@ -10,6 +10,8 @@ public interface ForumDao {
 
 	public List<DiscussionModel> searchOnCategory(Integer categoryId);
 
+	public List<DiscussionModel> getAnswersByUserId(Integer userId);
+
 	public String getDBPassword(String userName);
 
 	public void postQuestions(QuestionsEntity questionEntity);

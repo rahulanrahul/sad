@@ -24,4 +24,6 @@ public interface ForumService {
 	public ResponseEntity<String> delete(Integer questionId, Integer answerId);
 
 	public ResponseEntity<String> closeQuestion(DiscussionModel questionModel);
+
+	public ResponseEntity<List<DiscussionModel>> getAnswerByUserId(Integer userId);
 }

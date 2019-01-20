@@ -29,6 +29,11 @@ public class ForumController {
 		return forumService.getDiscussions(searchString, category, userId);
 	}
 
+	@GetMapping("/my-answers")
+	public ResponseEntity<List<DiscussionModel>> getAnswersByUserId(@RequestParam(required = false) Integer userId) {
+		return forumService.getAnswerByUserId(userId);
+	}
+
 	@GetMapping("/login-verification")
 	public ResponseEntity<String> verifyUser(@RequestParam(required = false) String userName,
 			@RequestParam(required = false) String password) {

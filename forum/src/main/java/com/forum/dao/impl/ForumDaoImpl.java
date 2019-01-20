@@ -126,6 +126,18 @@ public class ForumDaoImpl implements ForumDao {
 		session.update(questionEntity);
 	}
 
+	public List<DiscussionModel> getAnswersByUserId(Integer userId) {
+		Session session = sessionFactory.getCurrentSession();
+		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+		CriteriaQuery<AnswersEntity> criteriaQuery = criteriaBuilder.createQuery(AnswersEntity.class);
+		Root<AnswersEntity> answersRoot = criteriaQuery.from(AnswersEntity.class);
+		criteriaQuery.select(answersRoot);
+		criteriaQuery.where(criteriaBuilder.equal(answersRoot.get("answerPostedByUserId"), userId),
+				criteriaBuilder.equal(answersRoot.get("answerIsActive"), true));
+		List<AnswersEntity> listOfAnswersWithUserId = session.createQuery(criteriaQuery).getResultList();
+		return getListOfDiscussionModelFromAnswersEntity(listOfAnswersWithUserId, session);
+	}
+
 	private QuestionsEntity getQuestionEntity(Integer questionId, Session session) {
 		QuestionsEntity questionEntity = session.get(QuestionsEntity.class, questionId);
 		return questionEntity;
@@ -134,6 +146,26 @@ public class ForumDaoImpl implements ForumDao {
 	private AnswersEntity getAnswerEntity(Integer answerId, Session session) {
 		AnswersEntity answerEntity = session.get(AnswersEntity.class, answerId);
 		return answerEntity;
+	}
+
+	private List<DiscussionModel> getListOfDiscussionModelFromAnswersEntity(List<AnswersEntity> listOfAnswersWithUserId,
+			Session session) {
+		List<DiscussionModel> listOfDiscussionModel = new ArrayList<>();
+		listOfAnswersWithUserId.forEach(answerEntity -> {
+			DiscussionModel discussionModel = new DiscussionModel();
+			List<AnswersEntity> listOfAnswers = getListOfAnswersBasedOnAnswerId(answerEntity.getAnswerId());
+			discussionModel.setAnswer(listOfAnswers);
+			QuestionsEntity questionEntity = session.get(QuestionsEntity.class, answerEntity.getQuestionId());
+			discussionModel.setQuestionId(questionEntity.getQuestionId());
+			discussionModel.setQuestion(questionEntity.getQuestionDescription());
+			discussionModel.setUserId(questionEntity.getQuestionPostedByUserId());
+			discussionModel.setDiscussionThreadActive(questionEntity.isDiscussionThreadActive());
+			discussionModel.setCategoryId(questionEntity.getQuestionCategoryId());
+			discussionModel.setGroupId(questionEntity.getQuestionGroupId());
+			discussionModel.setTimestamp(questionEntity.getQuestionCreationDateTime());
+			listOfDiscussionModel.add(discussionModel);
+		});
+		return listOfDiscussionModel;
 	}
 
 	private List<DiscussionModel> getListOfDiscussionModelFromQuestionsEntity(
@@ -164,6 +196,17 @@ public class ForumDaoImpl implements ForumDao {
 		criteriaQuery.select(questionsRoot);
 		criteriaQuery.where(criteriaBuilder.equal(questionsRoot.get("questionId"), questionId),
 				criteriaBuilder.equal(questionsRoot.get("answerIsActive"), true));
+		return session.createQuery(criteriaQuery).getResultList();
+	}
+
+	private List<AnswersEntity> getListOfAnswersBasedOnAnswerId(Integer answerId) {
+		Session session = sessionFactory.getCurrentSession();
+		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+		CriteriaQuery<AnswersEntity> criteriaQuery = criteriaBuilder.createQuery(AnswersEntity.class);
+		Root<AnswersEntity> answersRoot = criteriaQuery.from(AnswersEntity.class);
+		criteriaQuery.select(answersRoot);
+		criteriaQuery.where(criteriaBuilder.equal(answersRoot.get("answerId"), answerId),
+				criteriaBuilder.equal(answersRoot.get("answerIsActive"), true));
 		return session.createQuery(criteriaQuery).getResultList();
 	}
 

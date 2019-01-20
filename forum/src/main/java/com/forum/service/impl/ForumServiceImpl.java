@@ -116,6 +116,15 @@ public class ForumServiceImpl implements ForumService {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
+	public ResponseEntity<List<DiscussionModel>> getAnswerByUserId(Integer userId) {
+		List<DiscussionModel> listOfDiscussionModel = forumDao.getAnswersByUserId(userId);
+		if (CollectionUtils.isEmpty(listOfDiscussionModel)) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} else {
+			return new ResponseEntity<>(listOfDiscussionModel, HttpStatus.OK);
+		}
+	}
+
 	private ResponseEntity<List<DiscussionModel>> searchOnUserId(Integer userId) {
 		List<DiscussionModel> listOfDiscussionModel = forumDao.searchOnUserId(userId);
 		if (CollectionUtils.isEmpty(listOfDiscussionModel)) {
