@@ -19,6 +19,7 @@ import com.forum.entity.AnswersEntity;
 import com.forum.entity.QuestionsEntity;
 import com.forum.model.AnswerModel;
 import com.forum.model.DiscussionModel;
+import com.forum.model.UserDetailsModel;
 import com.forum.service.ForumService;
 
 @Service
@@ -146,7 +147,17 @@ public class ForumServiceImpl implements ForumService {
 	@Override
 	public ResponseEntity<String> verifyUser(String userName, String password) {
 		String result=forumDao.verifyUserCount(userName.trim(),password);
-		System.out.println("Result of query : "+result);
+		if (result.equals("Success"))
+			return new ResponseEntity<>("User authentication successful.", HttpStatus.OK);
+		else
+			return new ResponseEntity<>("User authentication failed. Invalid Username or Password. Please try again.", HttpStatus.NOT_FOUND);
+	}
+
+	@Override
+	public ResponseEntity<String> validateUser(UserDetailsModel userModel) {
+		String userName=userModel.getUserName();
+		String password=userModel.getPassword();
+		String result=forumDao.verifyUserCount(userName,password);
 		if (result.equals("Success"))
 			return new ResponseEntity<>("User authentication successful.", HttpStatus.OK);
 		else

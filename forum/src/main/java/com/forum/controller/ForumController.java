@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.forum.model.AnswerModel;
 import com.forum.model.DiscussionModel;
+import com.forum.model.UserDetailsModel;
 import com.forum.service.ForumService;
 
 @RestController
@@ -39,7 +40,12 @@ public class ForumController {
 			@RequestParam(required = false) String password) {
 		return forumService.verifyUser(userName, password);
 	}
-
+	
+	@PostMapping("/login-validation")
+	public ResponseEntity<String>validateLogin(@RequestBody UserDetailsModel userModel){
+		return forumService.validateUser(userModel);
+	}
+	
 	@PostMapping("/post-question")
 	public ResponseEntity<String> postQuestions(@RequestBody DiscussionModel questionModel) {
 		return forumService.postQuestion(questionModel);

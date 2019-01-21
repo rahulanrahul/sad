@@ -22,6 +22,8 @@ public class UserDetailsModel {
 	private String phoneNumber;
 	private String userDesignation;
 	private String userType;
+	private String userName;
+	private String password;
 	private List<?> answerList;
 	private List<?> questionList;
 	private List<?> groupList;

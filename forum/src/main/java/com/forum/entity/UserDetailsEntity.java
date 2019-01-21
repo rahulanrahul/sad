@@ -49,9 +49,6 @@ public class UserDetailsEntity {
 	@Column(name = "user_type")
 	private String userType;
 
-	@Column(name = "department_id")
-	private int departmentId;
-
 	@Column(name = "rewards")
 	private String rewards;
 
