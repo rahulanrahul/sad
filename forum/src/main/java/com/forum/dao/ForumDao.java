@@ -12,8 +12,6 @@ public interface ForumDao {
 
 	public List<DiscussionModel> getAnswersByUserId(Integer userId);
 
-	public String getDBPassword(String userName);
-
 	public void postQuestions(QuestionsEntity questionEntity);
 
 	public void postAnswers(AnswersEntity answersEntity);
@@ -33,4 +31,6 @@ public interface ForumDao {
 	public void deleteAnswer(Integer answerId);
 
 	public void closeQuestions(Integer questionId);
+
+	public String verifyUserCount(String userName, String password);
 }

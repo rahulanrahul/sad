@@ -10,6 +10,7 @@ import javax.persistence.metamodel.EntityType;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -210,38 +211,19 @@ public class ForumDaoImpl implements ForumDao {
 		return session.createQuery(criteriaQuery).getResultList();
 	}
 
-//	@Override
-//	public int verifyUserCount(String userName, String password) {
-//		Session session = sessionFactory.getCurrentSession();
-////		int count = (Integer) session.createQuery(
-////				"select count(1) from user_details where user_name='" + userName + "' and password='" + password + "'")
-////				.getSingleResult();
-////		Root<UserDetailsEntity> questionsRoot = criteriaQuery.from(UserDetailsEntity.class);
-////		criteriaQuery.multiselect(criteriaBuilder.count(questionsRoot));
-////		criteriaQuery.where(criteriaBuilder.equal(questionsRoot.get("userName"), userName),
-////				criteriaBuilder.equal(questionsRoot.get("password"), password));		
-////		return session.createQuery(criteriaQuery).getSingleResult();
-//		
-//		@SuppressWarnings("rawtypes")
-//		Query query = session
-//				.createQuery(
-//						"select count(1) from UserDetailsEntity ud where ud.userName=:USERNAME and ud.password=:PASSWORD")
-//				.setParameter("USERNAME", userName).setParameter("PASSWORD", password);
-//		
-//		int count =  query.getFirstResult();
-//		System.out.println("Output of query"+count);
-//		return count;
-//	}
-
 	@Override
-	public String getDBPassword(String userName) {
-		Session session = sessionFactory.getCurrentSession();
-		CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-		CriteriaQuery<UserDetailsEntity> criteriaQuery = criteriaBuilder.createQuery(UserDetailsEntity.class);
-		Root<UserDetailsEntity> usersRoot = criteriaQuery.from(UserDetailsEntity.class);
-		criteriaQuery.select(usersRoot);
-		criteriaQuery.where(criteriaBuilder.equal(usersRoot.get("userName"), userName));
-		return session.createQuery(criteriaQuery).getSingleResult().getPassword();
+	public String verifyUserCount(String userName, String password) {
+		Session session = sessionFactory.getCurrentSession();		
+		@SuppressWarnings("rawtypes")
+		Query query = session
+				.createQuery(
+						"select count(1) from UserDetailsEntity ud where ud.userName=:USERNAME and ud.password=:PASSWORD")
+				.setParameter("USERNAME", userName).setParameter("PASSWORD", password);
+		
+		Long count = (Long)query.uniqueResult();
+		if (count==1)
+		return "Success";
+		else 
+		return "Failure";
 	}
-
 }

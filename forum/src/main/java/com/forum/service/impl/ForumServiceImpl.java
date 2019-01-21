@@ -145,13 +145,11 @@ public class ForumServiceImpl implements ForumService {
 
 	@Override
 	public ResponseEntity<String> verifyUser(String userName, String password) {
-		// long count=forumDao.verifyUserCount(userName.trim(),password);
-		System.out.println();
-		// if (count==1)
-		String dbPass = forumDao.getDBPassword(userName.trim());
-		if (dbPass.equals(password))
+		String result=forumDao.verifyUserCount(userName.trim(),password);
+		System.out.println("Result of query : "+result);
+		if (result.equals("Success"))
 			return new ResponseEntity<>("User authentication successful.", HttpStatus.OK);
 		else
-			return new ResponseEntity<>("Invalid Username or Password. Please try again.", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>("User authentication failed. Invalid Username or Password. Please try again.", HttpStatus.NOT_FOUND);
 	}
 }
