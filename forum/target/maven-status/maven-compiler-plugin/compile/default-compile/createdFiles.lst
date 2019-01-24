@@ -5,7 +5,6 @@ com/forum/entity/UserDetailsEntity.class
 com/forum/dao/ForumDao.class
 com/forum/service/UserService.class
 com/forum/service/impl/ForumServiceImpl.class
-com/forum/entity/DepartmentEntity.class
 com/forum/model/DiscussionModel.class
 com/forum/service/impl/UserServiceImpl.class
 com/forum/service/ForumService.class

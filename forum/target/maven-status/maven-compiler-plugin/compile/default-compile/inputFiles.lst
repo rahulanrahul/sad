@@ -11,7 +11,6 @@
 /Users/rahulvijayan/git/sad2019-1-team-14/forum/src/main/java/com/forum/service/UserService.java
 /Users/rahulvijayan/git/sad2019-1-team-14/forum/src/main/java/com/forum/dao/impl/ForumDaoImpl.java
 /Users/rahulvijayan/git/sad2019-1-team-14/forum/src/main/java/com/forum/dao/CategoryDao.java
-/Users/rahulvijayan/git/sad2019-1-team-14/forum/src/main/java/com/forum/entity/DepartmentEntity.java
 /Users/rahulvijayan/git/sad2019-1-team-14/forum/src/main/java/com/forum/dao/impl/CategoryDaoImpl.java
 /Users/rahulvijayan/git/sad2019-1-team-14/forum/src/main/java/com/forum/HibernateConfiguration.java
 /Users/rahulvijayan/git/sad2019-1-team-14/forum/src/main/java/com/forum/model/UserDetailsModel.java
