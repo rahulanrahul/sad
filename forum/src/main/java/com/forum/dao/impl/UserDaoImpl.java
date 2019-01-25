@@ -1,5 +1,7 @@
 package com.forum.dao.impl;
 
+import java.sql.Timestamp;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +40,7 @@ public class UserDaoImpl implements UserDao {
 		existingUserDetailsEntity.setLastName(lastName);
 		existingUserDetailsEntity.setEmailId(emailId);
 		existingUserDetailsEntity.setPhoneNumber(phoneNumber);
+		existingUserDetailsEntity.setUserModificationDateTime(new Timestamp(System.currentTimeMillis()));
 		session.update(existingUserDetailsEntity);
 	}
 

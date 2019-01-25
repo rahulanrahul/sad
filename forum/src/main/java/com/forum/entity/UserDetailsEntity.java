@@ -14,7 +14,6 @@ import com.fasterxml.jackson.annotation.JsonFilter;
 import lombok.Getter;
 import lombok.Setter;
 
-
 @Setter
 @Getter
 @Entity
@@ -34,23 +33,8 @@ public class UserDetailsEntity {
 	@Column(name = "last_name")
 	private String lastName;
 
-	@Column(name = "enrollment_id")
-	private String enrollmentId;
-
-	@Column(name = "date_of_birth")
-	private Date dateOfBirth;
-
 	@Column(name = "email_id")
 	private String emailId;
-
-	@Column(name = "user_designation")
-	private String userDesignation;
-
-	@Column(name = "user_type")
-	private String userType;
-
-	@Column(name = "rewards")
-	private String rewards;
 
 	@Column(name = "user_creation_date_time")
 	private Date userCreationDateTime;
@@ -60,15 +44,14 @@ public class UserDetailsEntity {
 
 	@Column(name = "user_is_active")
 	private boolean userIsActive;
-	
+
 	@Column(name = "phone_number")
 	private String phoneNumber;
-	
-	@Column(name= "user_name")
+
+	@Column(name = "user_name")
 	private String userName;
-	
+
 	@Column(name = "password")
 	private String password;
 
 }
-

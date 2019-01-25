@@ -1,5 +1,7 @@
 package com.forum.service.impl;
 
+import java.sql.Timestamp;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,10 @@ public class UserServiceImpl implements UserService {
 		userEntity.setLastName(userModel.getLastName());
 		userEntity.setEmailId(userModel.getEmailId());
 		userEntity.setPhoneNumber(userModel.getPhoneNumber());
+		userEntity.setUserName(userModel.getUserName());
+		userEntity.setPassword(userModel.getPassword());
+		userEntity.setUserCreationDateTime(new Timestamp(System.currentTimeMillis()));
+		userEntity.setUserModificationDateTime(new Timestamp(System.currentTimeMillis()));
 		userEntity.setUserIsActive(true);
 		userDao.postUserDetails(userEntity);
 		return new ResponseEntity<>(HttpStatus.CREATED);

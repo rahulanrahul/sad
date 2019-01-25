@@ -85,7 +85,7 @@ public class ForumServiceImpl implements ForumService {
 		answersEntity.setAnswerPostedByUserId(answerModel.getUserId());
 		if ((!forumDao.getQuestionEntityFromQuestionId(answerModel.getQuestionId()).isDiscussionThreadActive())
 				|| (!forumDao.getQuestionEntityFromQuestionId(answerModel.getQuestionId()).isQuestionActive())) {
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>("Question Inactive", HttpStatus.NO_CONTENT);
 		} else {
 			forumDao.postAnswers(answersEntity);
 			return new ResponseEntity<>(HttpStatus.CREATED);
@@ -146,21 +146,23 @@ public class ForumServiceImpl implements ForumService {
 
 	@Override
 	public ResponseEntity<String> verifyUser(String userName, String password) {
-		String result=forumDao.verifyUserCount(userName.trim(),password);
+		String result = forumDao.verifyUserCount(userName.trim(), password);
 		if (result.equals("Success"))
 			return new ResponseEntity<>("User authentication successful.", HttpStatus.OK);
 		else
-			return new ResponseEntity<>("User authentication failed. Invalid Username or Password. Please try again.", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>("User authentication failed. Invalid Username or Password. Please try again.",
+					HttpStatus.NOT_FOUND);
 	}
 
 	@Override
 	public ResponseEntity<String> validateUser(UserDetailsModel userModel) {
-		String userName=userModel.getUserName();
-		String password=userModel.getPassword();
-		String result=forumDao.verifyUserCount(userName,password);
+		String userName = userModel.getUserName();
+		String password = userModel.getPassword();
+		String result = forumDao.verifyUserCount(userName, password);
 		if (result.equals("Success"))
 			return new ResponseEntity<>("User authentication successful.", HttpStatus.OK);
 		else
-			return new ResponseEntity<>("User authentication failed. Invalid Username or Password. Please try again.", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>("User authentication failed. Invalid Username or Password. Please try again.",
+					HttpStatus.NOT_FOUND);
 	}
 }

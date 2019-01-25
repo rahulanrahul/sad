@@ -1,6 +1,5 @@
 package com.forum.model;
 
-import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -16,12 +15,8 @@ public class UserDetailsModel {
 	private int userId;
 	private String firstName;
 	private String lastName;
-	private Date dateOfBirth;
-	private String enrollmentId;
 	private String emailId;
 	private String phoneNumber;
-	private String userDesignation;
-	private String userType;
 	private String userName;
 	private String password;
 	private List<?> answerList;
