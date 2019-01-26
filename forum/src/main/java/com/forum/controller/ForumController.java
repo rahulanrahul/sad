@@ -38,12 +38,6 @@ public class ForumController {
 		return forumService.getAnswerByUserId(userId);
 	}
 
-	@CrossOrigin(origins = "http://localhost:4200")
-	@GetMapping("/login-verification")
-	public ResponseEntity<String> verifyUser(@RequestParam(required = false) String userName,
-			@RequestParam(required = false) String password) {
-		return forumService.verifyUser(userName, password);
-	}
 
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/login-validation")
