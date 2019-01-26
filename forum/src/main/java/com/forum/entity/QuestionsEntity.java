@@ -42,8 +42,5 @@ public class QuestionsEntity {
 	
 	@Column(name = "discussion_is_active")
 	private boolean discussionThreadActive;
-
-	@Column(name = "question_group_id")
-	private Integer questionGroupId;
 }
 
