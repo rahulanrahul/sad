@@ -40,7 +40,7 @@ public class ForumController {
 	}
 
 
-	//@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/login-validation")
 	public ResponseEntity<UserDetailsModel> validateLogin(@RequestBody UserDetailsModel userModel) {
 		return forumService.validateUser(userModel);
