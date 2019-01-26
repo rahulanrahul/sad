@@ -161,7 +161,6 @@ public class ForumDaoImpl implements ForumDao {
 			discussionModel.setUserId(questionEntity.getQuestionPostedByUserId());
 			discussionModel.setDiscussionThreadActive(questionEntity.isDiscussionThreadActive());
 			discussionModel.setCategoryId(questionEntity.getQuestionCategoryId());
-			discussionModel.setGroupId(questionEntity.getQuestionGroupId());
 			discussionModel.setTimestamp(questionEntity.getQuestionCreationDateTime());
 			listOfDiscussionModel.add(discussionModel);
 		});
@@ -181,7 +180,6 @@ public class ForumDaoImpl implements ForumDao {
 			List<AnswersEntity> listOfAnswers = getListOfAnswersBasedOnQuestionId(questionEntity.getQuestionId());
 			discussionModel.setAnswer(listOfAnswers);
 			discussionModel.setCategoryId(questionEntity.getQuestionCategoryId());
-			discussionModel.setGroupId(questionEntity.getQuestionGroupId());
 			discussionModel.setTimestamp(questionEntity.getQuestionCreationDateTime());
 			listOfDiscussionModel.add(discussionModel);
 		});
