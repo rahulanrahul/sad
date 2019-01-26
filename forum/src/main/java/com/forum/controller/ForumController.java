@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.forum.entity.UserDetailsEntity;
 import com.forum.model.AnswerModel;
 import com.forum.model.DiscussionModel;
 import com.forum.model.UserDetailsModel;
@@ -39,9 +40,9 @@ public class ForumController {
 	}
 
 
-	@CrossOrigin(origins = "http://localhost:4200")
+	//@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/login-validation")
-	public ResponseEntity<String> validateLogin(@RequestBody UserDetailsModel userModel) {
+	public ResponseEntity<UserDetailsModel> validateLogin(@RequestBody UserDetailsModel userModel) {
 		return forumService.validateUser(userModel);
 	}
 

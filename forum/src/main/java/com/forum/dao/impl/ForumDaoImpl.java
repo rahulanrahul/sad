@@ -10,13 +10,13 @@ import javax.persistence.metamodel.EntityType;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.forum.dao.ForumDao;
 import com.forum.entity.AnswersEntity;
 import com.forum.entity.QuestionsEntity;
+import com.forum.entity.UserDetailsEntity;
 import com.forum.model.DiscussionModel;
 
 @Repository
@@ -209,17 +209,17 @@ public class ForumDaoImpl implements ForumDao {
 	}
 
 	@Override
-	public String verifyUserCount(String userName, String password) {
+	public UserDetailsEntity verifyUserCount(String userName, String password) {
 		Session session = sessionFactory.getCurrentSession();
-		@SuppressWarnings("rawtypes")
-		Query query = session.createQuery(
-				"select count(1) from UserDetailsEntity ud where ud.userName=:USERNAME and ud.password=:PASSWORD")
-				.setParameter("USERNAME", userName).setParameter("PASSWORD", password);
-
-		Long count = (Long) query.uniqueResult();
-		if (count == 1)
-			return "Success";
-		else
-			return "Failure";
+		try {
+		UserDetailsEntity user = (UserDetailsEntity) session.createQuery(
+				"from UserDetailsEntity ud where ud.userName='" + userName + "'and ud.password='" + password + "'").getSingleResult();
+		return user;
+		}
+		catch (Exception e)
+		{
+			UserDetailsEntity user =new UserDetailsEntity();
+			return user;
+		}		
 	}
 }

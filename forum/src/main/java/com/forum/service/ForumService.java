@@ -26,5 +26,5 @@ public interface ForumService {
 
 	public ResponseEntity<List<DiscussionModel>> getAnswerByUserId(Integer userId);
 
-	public ResponseEntity<String> validateUser(UserDetailsModel userModel);
+	public ResponseEntity<UserDetailsModel> validateUser(UserDetailsModel userModel);
 }
