@@ -20,11 +20,13 @@ public interface ForumService {
 
 	public ResponseEntity<String> editAnswer(AnswerModel answerModel);
 
-	public ResponseEntity<String> delete(Integer questionId, Integer answerId);
-
-	public ResponseEntity<String> closeQuestion(DiscussionModel questionModel);
+	public ResponseEntity<String> closeQuestion(int questionId);
 
 	public ResponseEntity<List<DiscussionModel>> getAnswerByUserId(Integer userId);
 
 	public ResponseEntity<UserDetailsModel> validateUser(UserDetailsModel userModel);
+
+	public ResponseEntity<String> deleteQuestion(Integer questionId);
+
+	public ResponseEntity<String> deleteAnswer(Integer answerId);
 }

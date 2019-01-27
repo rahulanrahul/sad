@@ -100,20 +100,21 @@ public class ForumServiceImpl implements ForumService {
 		forumDao.editAnswers(answerId, answerDescription);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
-
+	
 	@Override
-	public ResponseEntity<String> delete(Integer questionId, Integer answerId) {
-		if (!(ObjectUtils.isEmpty(questionId))) {
-			forumDao.deleteQuestion(questionId);
-		} else {
-			forumDao.deleteAnswer(answerId);
-		}
+	public ResponseEntity<String> deleteQuestion(Integer questionId) {
+		forumDao.deleteQuestion(questionId);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	@Override
-	public ResponseEntity<String> closeQuestion(DiscussionModel questionModel) {
-		int questionId = questionModel.getQuestionId();
+	public ResponseEntity<String> deleteAnswer(Integer answerId) {
+		forumDao.deleteAnswer(answerId);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	@Override
+	public ResponseEntity<String> closeQuestion(int questionId) {
 		forumDao.closeQuestions(questionId);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
@@ -161,4 +162,5 @@ public class ForumServiceImpl implements ForumService {
 			//return user;
 		}
 	}
+
 }

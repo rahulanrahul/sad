@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.forum.entity.UserDetailsEntity;
 import com.forum.model.AnswerModel;
 import com.forum.model.DiscussionModel;
 import com.forum.model.UserDetailsModel;
@@ -27,60 +27,67 @@ public class ForumController {
 	ForumService forumService;
 
 	@CrossOrigin(origins = "http://localhost:4200")
-	@GetMapping("/search")
+	@PostMapping("/questions")
+	public ResponseEntity<String> postQuestions(@RequestBody DiscussionModel questionModel) {
+		return forumService.postQuestion(questionModel);
+	}
+	
+	@CrossOrigin(origins = "http://localhost:4200")
+	@PutMapping("/questions/{questionId}")
+	public ResponseEntity<String> editQuestions(@PathVariable int questionId, @RequestBody DiscussionModel questionModel) {
+		questionModel.setQuestionId(questionId);
+		return forumService.editQuestion(questionModel);
+	}
+	
+	@CrossOrigin(origins = "http://localhost:4200")
+	@PutMapping("/questions/close-thread/{questionId}")
+	public ResponseEntity<String> closeQuestions(@PathVariable int questionId) {
+		return forumService.closeQuestion(questionId);
+	}
+
+	@CrossOrigin(origins = "http://localhost:4200")
+	@DeleteMapping("/questions/{questionId}")
+	public ResponseEntity<String> deleteQuestions(@PathVariable int questionId) {
+		//return forumService.delete(questionId, answerId);
+		return forumService.deleteQuestion(questionId);
+	}
+	
+	@CrossOrigin(origins = "http://localhost:4200")
+	@GetMapping("/questions")
 	public ResponseEntity<List<DiscussionModel>> detailedSearch(@RequestParam(required = false) String searchString,
 			@RequestParam(required = false) String category, @RequestParam(required = false) Integer userId) {
 		return forumService.getDiscussions(searchString, category, userId);
 	}
 
 	@CrossOrigin(origins = "http://localhost:4200")
-	@GetMapping("/my-answers")
-	public ResponseEntity<List<DiscussionModel>> getAnswersByUserId(@RequestParam(required = false) Integer userId) {
-		return forumService.getAnswerByUserId(userId);
-	}
-
-
-	@CrossOrigin(origins = "http://localhost:4200")
-	@PostMapping("/login-validation")
-	public ResponseEntity<UserDetailsModel> validateLogin(@RequestBody UserDetailsModel userModel) {
-		return forumService.validateUser(userModel);
-	}
-
-	@CrossOrigin(origins = "http://localhost:4200")
-	@PostMapping("/post-question")
-	public ResponseEntity<String> postQuestions(@RequestBody DiscussionModel questionModel) {
-		return forumService.postQuestion(questionModel);
-	}
-
-	@CrossOrigin(origins = "http://localhost:4200")
-	@PostMapping("/answer-question")
+	@PostMapping("/answers")
 	public ResponseEntity<String> answerQuestions(@RequestBody AnswerModel answerModel) {
 		return forumService.answerQuestion(answerModel);
 	}
 
 	@CrossOrigin(origins = "http://localhost:4200")
-	@PutMapping("/edit-question")
-	public ResponseEntity<String> editQuestions(@RequestBody DiscussionModel questionModel) {
-		return forumService.editQuestion(questionModel);
-	}
-
-	@CrossOrigin(origins = "http://localhost:4200")
-	@PutMapping("/edit-answer")
-	public ResponseEntity<String> editAnswers(@RequestBody AnswerModel answerModel) {
+	@PutMapping("/answers/{answerId}")
+	public ResponseEntity<String> editAnswers(@PathVariable int answerId, @RequestBody AnswerModel answerModel) {
+		answerModel.setAnswerId(answerId);
 		return forumService.editAnswer(answerModel);
 	}
-
+	
 	@CrossOrigin(origins = "http://localhost:4200")
-	@DeleteMapping("/delete")
-	public ResponseEntity<String> deleteQuestionsOrAnswers(@RequestParam(required = false) Integer questionId,
-			@RequestParam(required = false) Integer answerId) {
-		return forumService.delete(questionId, answerId);
+	@DeleteMapping("/answers/{answerId}")
+	public ResponseEntity<String> deleteAnswers(@PathVariable int answerId) {
+		return forumService.deleteAnswer(answerId);
+	}
+	
+	@CrossOrigin(origins = "http://localhost:4200")
+	@GetMapping("/answers")
+	public ResponseEntity<List<DiscussionModel>> getAnswersByUserId(@RequestParam Integer userId) {
+		return forumService.getAnswerByUserId(userId);
 	}
 
 	@CrossOrigin(origins = "http://localhost:4200")
-	@PutMapping("/close-question")
-	public ResponseEntity<String> closeQuestions(@RequestBody DiscussionModel questionModel) {
-		return forumService.closeQuestion(questionModel);
+	@PostMapping("/login")
+	public ResponseEntity<UserDetailsModel> validateLogin(@RequestBody UserDetailsModel userModel) {
+		return forumService.validateUser(userModel);
 	}
 
 }
