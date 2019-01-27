@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.forum.entity.AnswersEntity;
 import com.forum.entity.QuestionsEntity;
-import com.forum.entity.UserDetailsEntity;
 import com.forum.model.DiscussionModel;
 
 public interface ForumDao {
@@ -33,5 +32,4 @@ public interface ForumDao {
 
 	public void closeQuestions(Integer questionId);
 
-	public UserDetailsEntity verifyUserCount(String userName, String password);
 }

@@ -16,7 +16,6 @@ import org.springframework.stereotype.Repository;
 import com.forum.dao.ForumDao;
 import com.forum.entity.AnswersEntity;
 import com.forum.entity.QuestionsEntity;
-import com.forum.entity.UserDetailsEntity;
 import com.forum.model.DiscussionModel;
 
 @Repository
@@ -208,18 +207,4 @@ public class ForumDaoImpl implements ForumDao {
 		return session.createQuery(criteriaQuery).getResultList();
 	}
 
-	@Override
-	public UserDetailsEntity verifyUserCount(String userName, String password) {
-		Session session = sessionFactory.getCurrentSession();
-		try {
-		UserDetailsEntity user = (UserDetailsEntity) session.createQuery(
-				"from UserDetailsEntity ud where ud.userName='" + userName + "'and ud.password='" + password + "'").getSingleResult();
-		return user;
-		}
-		catch (Exception e)
-		{
-			UserDetailsEntity user =new UserDetailsEntity();
-			return user;
-		}		
-	}
 }

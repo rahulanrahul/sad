@@ -17,10 +17,8 @@ import com.forum.dao.CategoryDao;
 import com.forum.dao.ForumDao;
 import com.forum.entity.AnswersEntity;
 import com.forum.entity.QuestionsEntity;
-import com.forum.entity.UserDetailsEntity;
 import com.forum.model.AnswerModel;
 import com.forum.model.DiscussionModel;
-import com.forum.model.UserDetailsModel;
 import com.forum.service.ForumService;
 
 @Service
@@ -143,23 +141,6 @@ public class ForumServiceImpl implements ForumService {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else {
 			return new ResponseEntity<>(listOfDiscussionModel, HttpStatus.OK);
-		}
-	}
-
-	@Override
-	public ResponseEntity<UserDetailsModel> validateUser(UserDetailsModel userModel) {
-		String userName = userModel.getUserName();
-		String password = userModel.getPassword();
-		UserDetailsEntity userDetailsEntity = forumDao.verifyUserCount(userName, password);
-		if (userDetailsEntity.getUserId()==0) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-		else
-		{
-			UserDetailsModel userDetailsModel = new UserDetailsModel();
-			userDetailsModel.setUserId(userDetailsEntity.getUserId());
-			return new ResponseEntity<>(userDetailsModel, HttpStatus.OK);
-			//return user;
 		}
 	}
 

@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 
 import com.forum.model.AnswerModel;
 import com.forum.model.DiscussionModel;
-import com.forum.model.UserDetailsModel;
 
 public interface ForumService {
 
@@ -23,8 +22,6 @@ public interface ForumService {
 	public ResponseEntity<String> closeQuestion(int questionId);
 
 	public ResponseEntity<List<DiscussionModel>> getAnswerByUserId(Integer userId);
-
-	public ResponseEntity<UserDetailsModel> validateUser(UserDetailsModel userModel);
 
 	public ResponseEntity<String> deleteQuestion(Integer questionId);
 

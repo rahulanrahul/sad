@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.forum.model.AnswerModel;
 import com.forum.model.DiscussionModel;
-import com.forum.model.UserDetailsModel;
 import com.forum.service.ForumService;
 
 @RestController
@@ -82,12 +81,6 @@ public class ForumController {
 	@GetMapping("/answers")
 	public ResponseEntity<List<DiscussionModel>> getAnswersByUserId(@RequestParam Integer userId) {
 		return forumService.getAnswerByUserId(userId);
-	}
-
-	@CrossOrigin(origins = "http://localhost:4200")
-	@PostMapping("/login")
-	public ResponseEntity<UserDetailsModel> validateLogin(@RequestBody UserDetailsModel userModel) {
-		return forumService.validateUser(userModel);
 	}
 
 }
