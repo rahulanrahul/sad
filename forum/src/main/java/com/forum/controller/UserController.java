@@ -16,13 +16,13 @@ import com.forum.model.UserDetailsModel;
 import com.forum.service.UserService;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/")
 public class UserController {
 	@Autowired
 	UserService userService;
 
-	@CrossOrigin(origins = "http://localhost:4200")
-	@PostMapping("/post-userdetails")
+	//@CrossOrigin(origins = "http://localhost:4200")
+	@PostMapping("/users")
 	public ResponseEntity<String> postuserDetails(@RequestBody UserDetailsModel userModel) {
 		return userService.postUser(userModel);
 	}
