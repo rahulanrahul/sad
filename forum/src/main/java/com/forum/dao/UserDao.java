@@ -13,4 +13,6 @@ public interface UserDao {
 
 	public void deleteUserDetails(Integer userId);
 
+	public UserDetailsEntity verifyUser(String userName, String password);
+
 }

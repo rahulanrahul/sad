@@ -55,4 +55,18 @@ public class UserServiceImpl implements UserService {
 		userDao.deleteUserDetails(userId);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
+	
+	@Override
+	public ResponseEntity<UserDetailsModel> validateUser(UserDetailsModel userModel) {
+		UserDetailsEntity userDetailsEntity = userDao.verifyUser(userModel.getUserName(), userModel.getPassword());
+		if (userDetailsEntity.getUserId()==0) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		else
+		{
+			UserDetailsModel userDetailsModel = new UserDetailsModel();
+			userDetailsModel.setUserId(userDetailsEntity.getUserId());
+			return new ResponseEntity<>(userDetailsModel, HttpStatus.OK);
+		}
+	}
 }

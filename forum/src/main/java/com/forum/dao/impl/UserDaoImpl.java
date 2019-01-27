@@ -55,4 +55,19 @@ public class UserDaoImpl implements UserDao {
 		UserDetailsEntity userDetailsEntity = session.get(UserDetailsEntity.class, userId);
 		return userDetailsEntity;
 	}
+	
+	@Override
+	public UserDetailsEntity verifyUser(String userName, String password) {
+		Session session = sessionFactory.getCurrentSession();
+		try {
+		UserDetailsEntity user = (UserDetailsEntity) session.createQuery(
+				"from UserDetailsEntity ud where ud.userName='" + userName + "'and ud.password='" + password + "'").getSingleResult();
+		return user;
+		}
+		catch (Exception e)
+		{
+			UserDetailsEntity user =new UserDetailsEntity();
+			return user;
+		}		
+	}
 }

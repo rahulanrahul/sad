@@ -44,4 +44,10 @@ public class UserController {
 	public ResponseEntity<String> deleteuserDetails(@RequestParam(required = false) int userId) {
 		return userService.deleteUser(userId);
 	}
+	
+	@CrossOrigin(origins = "http://localhost:4200")
+	@PostMapping("/login")
+	public ResponseEntity<UserDetailsModel> validateLogin(@RequestBody UserDetailsModel userModel) {
+		return userService.validateUser(userModel);
+	}
 }

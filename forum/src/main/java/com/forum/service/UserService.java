@@ -13,4 +13,6 @@ public interface UserService {
 	public ResponseEntity<String> editUser(UserDetailsModel userModel);
 
 	public ResponseEntity<String> deleteUser(Integer userId);
+
+	public ResponseEntity<UserDetailsModel> validateUser(UserDetailsModel userModel);
 }
