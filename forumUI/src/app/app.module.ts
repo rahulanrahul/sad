@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +14,9 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PostquestionComponent } from './components/postquestion/postquestion.component';
 import { AuthenticationService } from './services/authentication.service';
 import { AlertService } from './services/alert.service';
+import { MyquestionsComponent } from './components/myquestions/myquestions.component';
+import { MyprofileComponent } from './components/myprofile/myprofile.component';
+import { MyanswersComponent } from './components/myanswers/myanswers.component';
 
 @NgModule({
   declarations: [
@@ -21,10 +25,14 @@ import { AlertService } from './services/alert.service';
     AlertComponent,
     LoginComponent,
     DashboardComponent,
-    PostquestionComponent
+    PostquestionComponent,
+    MyquestionsComponent,
+    MyprofileComponent,
+    MyanswersComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule

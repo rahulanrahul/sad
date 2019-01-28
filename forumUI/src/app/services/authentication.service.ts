@@ -28,7 +28,7 @@ export class AuthenticationService {
   }
 
   login(user: User) {
-    return this.http.post<any>('//localhost:8080/user/login', user, httpOptions)
+    return this.http.post<any>('//localhost:8080/login', user, httpOptions)
       .pipe(map(user => {
         if (user) {
           this.currentUserSubject.next(user);

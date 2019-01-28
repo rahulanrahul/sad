@@ -19,4 +19,8 @@ export class UserService {
   register(user: User): Observable<any> {
     return this.http.post(`//localhost:8080/user/post-userdetails`, user, httpOptions);
   }
+
+  getMyQuestions(user: User): Observable<any> {
+    return this.http.post(`//localhost:8080/user/post-userdetails`, user, httpOptions);
+  }
 }

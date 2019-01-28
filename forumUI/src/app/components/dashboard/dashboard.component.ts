@@ -15,6 +15,7 @@ export class DashboardComponent implements OnInit {
   ) {
     this.userId = localStorage.getItem('currentUser');
     console.log(this.userId);
+    this.alertService.error("Please Logout to exit");
     if (!this.userId) {
       console.log(this.userId);
       this.router.navigate(['/login']);
