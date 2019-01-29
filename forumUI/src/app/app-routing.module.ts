@@ -7,6 +7,7 @@ import { PostquestionComponent } from './components/postquestion/postquestion.co
 import { MyprofileComponent } from './components/myprofile/myprofile.component';
 import { MyanswersComponent } from './components/myanswers/myanswers.component';
 import { MyquestionsComponent } from './components/myquestions/myquestions.component';
+import { EditprofileComponent } from './components/editprofile/editprofile.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent, },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'myanswers', component: MyanswersComponent },
   { path: 'myquestions', component: MyquestionsComponent },
   { path: 'postquestion', component: PostquestionComponent },
+  { path: 'editprofile', component: EditprofileComponent },
   // otherwise redirect to home
   { path: '**', redirectTo: '' }
 ];

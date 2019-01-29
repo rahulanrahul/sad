@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { first } from 'rxjs/operators';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-myprofile',
@@ -15,11 +16,10 @@ export class MyprofileComponent implements OnInit {
   lastName: any;
   emailId: any;
   phoneNumber: any;
-
   isDisabled: boolean = true;
-  submitButton: string = "Edit";
   constructor(private userSerive: UserService,
-    private formBuilder: FormBuilder
+              private formBuilder: FormBuilder,
+              private router: Router
   ) {
     this.userForm = this.formBuilder.group({
       firstName: [{ value: '', disabled: this.isDisabled }, Validators.required],
@@ -54,14 +54,7 @@ export class MyprofileComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.submitButton);
-    if (this.submitButton == "Edit") {
-      console.log(this.submitButton);
-      this.submitButton = "Submit";
-    } else {
-      this.submitButton = "Edit";
-    }
-    console.log(this.submitButton);
+    this.router.navigate(['/editprofile']);
   }
 
 }

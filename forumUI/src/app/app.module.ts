@@ -17,6 +17,7 @@ import { AlertService } from './services/alert.service';
 import { MyquestionsComponent } from './components/myquestions/myquestions.component';
 import { MyprofileComponent } from './components/myprofile/myprofile.component';
 import { MyanswersComponent } from './components/myanswers/myanswers.component';
+import { EditprofileComponent } from './components/editprofile/editprofile.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { MyanswersComponent } from './components/myanswers/myanswers.component';
     PostquestionComponent,
     MyquestionsComponent,
     MyprofileComponent,
-    MyanswersComponent
+    MyanswersComponent,
+    EditprofileComponent
   ],
   imports: [
     BrowserModule,
