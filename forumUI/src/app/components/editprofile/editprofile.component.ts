@@ -60,11 +60,20 @@ export class EditprofileComponent implements OnInit {
   }
 
   deleteAccount(){
+    this.userId = localStorage.getItem('currentUser');
+    this.userService.deleteUser(this.userId)
+    .pipe(first())
+      .subscribe(
+        data => {
+          this.alertService.success("Profile Deleted Successfully", true);
+        },
+        error => {
+          return;
+        });
     this.authenticationService.logout();
   }  
 
   onSubmit() {
-    console.log("On submit triggered");
     this.userId = localStorage.getItem('currentUser');
     this.userService.updateUser(this.userId, this.userForm.value)
     .pipe(first())

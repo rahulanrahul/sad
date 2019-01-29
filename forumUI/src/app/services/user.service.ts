@@ -35,4 +35,10 @@ export class UserService {
     this.url = this.url.concat(userId.toString());
     return this.http.put(this.url, user, updateUserHttpOptions);
   }
+
+  deleteUser(userId: number): Observable<any> {
+    this.url = "//localhost:8080/users/";
+    this.url = this.url.concat(userId.toString());
+    return this.http.delete(this.url, HttpOptions);
+  }
 }
