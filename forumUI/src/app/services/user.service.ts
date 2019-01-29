@@ -5,11 +5,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { User } from '../models/user.model';
 
-const registerHttpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-};
-let params = new HttpParams().set("userId", "12");
-const getUserHttpOptions = {
+const HttpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
 };
 @Injectable({
@@ -20,14 +16,23 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   register(user: User): Observable<any> {
-    return this.http.post(this.url, user, registerHttpOptions);
+    return this.http.post(this.url, user, HttpOptions);
   }
 
   getUser(userId: number): Observable<any> {
-    console.log(userId);
     this.url = "//localhost:8080/users/";
     this.url = this.url.concat(userId.toString());
-    console.log(this.url);
-    return this.http.get(this.url, getUserHttpOptions);
+    return this.http.get(this.url, HttpOptions);
+  }
+
+  updateUser(userId: number, user: User): Observable<any> {
+    let params = new HttpParams().set("userId", userId.toString());
+    const updateUserHttpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      params: params,
+    };
+    this.url = "//localhost:8080/users/";
+    this.url = this.url.concat(userId.toString());
+    return this.http.put(this.url, user, updateUserHttpOptions);
   }
 }
