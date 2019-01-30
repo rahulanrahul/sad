@@ -61,7 +61,7 @@ public class UserDaoImpl implements UserDao {
 		Session session = sessionFactory.getCurrentSession();
 		try {
 		UserDetailsEntity user = (UserDetailsEntity) session.createQuery(
-				"from UserDetailsEntity ud where ud.userName='" + userName + "'and ud.password='" + password + "'").getSingleResult();
+				"from UserDetailsEntity ud where ud.userName='" + userName + "'and ud.password='" + password + "' and ud.userIsActive='"+true+"'").getSingleResult();
 		return user;
 		}
 		catch (Exception e)

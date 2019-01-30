@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthenticationService } from '../../services/authentication.service';
-import { User } from '../../models/user.model';
-import { AlertService } from '../../services/alert.service';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +14,6 @@ export class AppComponent {
 
   constructor(
     private router: Router,
-    private alertService: AlertService,
     private authenticationService: AuthenticationService
   ) {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
