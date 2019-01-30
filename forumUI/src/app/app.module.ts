@@ -18,6 +18,7 @@ import { MyquestionsComponent } from './components/myquestions/myquestions.compo
 import { MyprofileComponent } from './components/myprofile/myprofile.component';
 import { MyanswersComponent } from './components/myanswers/myanswers.component';
 import { EditprofileComponent } from './components/editprofile/editprofile.component';
+import { ForumService } from './services/forum.service';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,7 @@ import { EditprofileComponent } from './components/editprofile/editprofile.compo
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [UserService, AuthenticationService, AlertService],
+  providers: [UserService, ForumService, AuthenticationService, AlertService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

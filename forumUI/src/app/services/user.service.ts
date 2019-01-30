@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
 
 import { User } from '../models/user.model';
 
@@ -15,7 +14,8 @@ export class UserService {
   url: string;
   constructor(private http: HttpClient) { }
 
-  register(user: User): Observable<any> {
+  registerUser(user: User): Observable<any> {
+    this.url = "//localhost:8080/users/";
     return this.http.post(this.url, user, HttpOptions);
   }
 

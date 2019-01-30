@@ -48,9 +48,9 @@ export class EditprofileComponent implements OnInit {
           this.phoneNumber = data.phoneNumber;
           this.userForm = this.formBuilder.group({
             firstName: [this.firstName],
-            lastName: [this.lastName, Validators.required],
-            emailId: [this.emailId, Validators.required],
-            phoneNumber: [this.phoneNumber, Validators.required],
+            lastName: [this.lastName],
+            emailId: [this.emailId],
+            phoneNumber: [this.phoneNumber],
           });
         },
         error => {
