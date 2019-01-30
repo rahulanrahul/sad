@@ -4,6 +4,8 @@ import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PostquestionComponent } from './components/postquestion/postquestion.component';
+import { SearchQuestionComponent } from './components/search-question/search-question.component';
+import { ShowDiscussionsComponent } from './components/show-discussions/show-discussions.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent, },
@@ -11,6 +13,8 @@ const routes: Routes = [
   { path: 'register', component: RegistrationComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'postquestion', component: PostquestionComponent },
+  { path: 'search-question', component: SearchQuestionComponent },
+  { path: 'show-discussion', component: ShowDiscussionsComponent},
   // otherwise redirect to home
   { path: '**', redirectTo: '' }
 ];

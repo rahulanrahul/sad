@@ -13,6 +13,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PostquestionComponent } from './components/postquestion/postquestion.component';
 import { AuthenticationService } from './services/authentication.service';
 import { AlertService } from './services/alert.service';
+import { SearchQuestionComponent } from './components/search-question/search-question.component';
+import { ShowDiscussionsComponent } from './components/show-discussions/show-discussions.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { AlertService } from './services/alert.service';
     AlertComponent,
     LoginComponent,
     DashboardComponent,
-    PostquestionComponent
+    PostquestionComponent,
+    SearchQuestionComponent,
+    ShowDiscussionsComponent
   ],
   imports: [
     BrowserModule,
