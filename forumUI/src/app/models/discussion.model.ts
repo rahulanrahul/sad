@@ -1,7 +1,7 @@
 export class Discussion {
+    question:string;
     questionId: number;
     category: String;
-    question: String;
     userName: String;
     userId: number;
     timestamp: string;

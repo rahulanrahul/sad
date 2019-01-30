@@ -14,6 +14,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PostquestionComponent } from './components/postquestion/postquestion.component';
 import { AuthenticationService } from './services/authentication.service';
 import { AlertService } from './services/alert.service';
+import { SearchQuestionComponent } from './components/search-question/search-question.component';
+import { ShowDiscussionsComponent } from './components/show-discussions/show-discussions.component';
 import { MyquestionsComponent } from './components/myquestions/myquestions.component';
 import { MyprofileComponent } from './components/myprofile/myprofile.component';
 import { MyanswersComponent } from './components/myanswers/myanswers.component';
@@ -27,6 +29,9 @@ import { ForumService } from './services/forum.service';
     AlertComponent,
     LoginComponent,
     DashboardComponent,
+    PostquestionComponent,
+    SearchQuestionComponent,
+    ShowDiscussionsComponent,
     PostquestionComponent,
     MyquestionsComponent,
     MyprofileComponent,
