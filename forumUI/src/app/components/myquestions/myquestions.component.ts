@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { first } from 'rxjs/operators';
 import { ForumService } from '../../services/forum.service';
 import { AlertService } from '../../services/alert.service';
 
@@ -29,16 +30,35 @@ export class MyquestionsComponent implements OnInit {
       );
   }
 
-  onEdit(userId: any) {
-    console.log(userId);
+  onEdit(questionId: any) {
+    console.log(questionId);
   }
 
-  onClose(userId: any) {
-    console.log(userId);
+  onClose(questionId: any) {
+    this.forumService.closeQuestion(questionId)
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.alertService.success("Question Closed Successfully", true);
+          this.ngOnInit();
+        },
+        error => {
+          this.alertService.error("Question Closure Failed");
+          return;
+        });
   }
 
-  onDelete(userId: any) {
-    console.log(userId);
+  onDelete(questionId: any) {
+    this.forumService.deleteQuestion(questionId)
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.alertService.success("Question Deleted Successfully", true);
+          this.ngOnInit();
+        },
+        error => {
+          this.alertService.error("Question Deletion Failed");
+          return;
+        });
   }
-
 }

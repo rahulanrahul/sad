@@ -7,13 +7,16 @@
   <div *ngFor="let answer of discussion.answer">
     <p id="answer">{{answer.answerDescription}}</p>
   </div>
-  <div>
+  <div class="buttons">
     <br>
     <button class="btn btn-danger" style="cursor: pointer;" (click)="onEdit(discussion.questionId)">Edit Question</button>
     &nbsp;
     <button class="btn btn-danger" style="cursor: pointer;" (click)="onDelete(discussion.questionId)">Delete Question</button>
     &nbsp;
-    <button class="btn btn-danger" style="cursor: pointer;" (click)="onClose(discussion.questionId)">Close Discussion</button>
+    <div *ngIf="discussion.discussionThreadActive">
+      <br>
+      <button class="btn btn-danger" style="cursor: pointer;" (click)="onClose(discussion.questionId)">Close Discussion</button>
+    </div>
   </div>
   <br><br>
 </div>

@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { User } from '../models/user.model';
-
 const HttpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
 };
@@ -29,5 +27,17 @@ export class ForumService {
   getDiscussionsByUserId(urlParameter: string): Observable<any> {
     this.url = "//localhost:8080/forum/questions?userId=";
     return this.http.get<any>(this.url + urlParameter);
+  }
+
+  deleteQuestion(questionId: number): Observable<any> {
+    this.url = "//localhost:8080/forum/questions/";
+    this.url = this.url.concat(questionId.toString());
+    return this.http.delete(this.url, HttpOptions);
+  }
+
+  closeQuestion(questionId: number): Observable<any> {
+    this.url = "//localhost:8080/forum/questions/close-thread/";
+    this.url = this.url.concat(questionId.toString());
+    return this.http.put(this.url, HttpOptions);
   }
 }

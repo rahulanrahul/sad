@@ -71,6 +71,7 @@ export class EditprofileComponent implements OnInit {
           this.alertService.success("Profile Deleted Successfully", true);
         },
         error => {
+          this.alertService.error("Profile Deletion Failed");
           return;
         });
     this.authenticationService.logout();
