@@ -23,6 +23,13 @@ export class ForumService {
   getDiscussionsSearchString(urlParameter: string): Observable<any> {
     console.log('Inside forum service');
     const searchStringUrl = "//localhost:8080/forum/questions?searchString=";
-    return this.http.get<any>(searchStringUrl + urlParameter);
+    return this.http.get<any[]>(searchStringUrl + urlParameter, HttpOptions);
   }
+
+  getDiscussionsCategory(urlParameter: string): Observable<any> {
+    console.log('Inside forum service');
+    const searchStringUrl = "//localhost:8080/forum/questions?category=";
+    return this.http.get<any[]>(searchStringUrl + urlParameter, HttpOptions);
+  }
+
 }

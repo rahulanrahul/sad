@@ -1,17 +1,61 @@
 <h4>Search Question</h4>
+<!--Form for SearchString-->
 <form [formGroup]="searchStringForm" (ngSubmit)="onSubmitSearchString()">
   <div class="form-group">
     <label for="searchString">Search String</label>
-    <input type="text" formControlName="searchString" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.searchString.errors }" placeholder="Search ..."/>
+    <input type="text" formControlName="searchString" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.searchString.errors }"
+      placeholder="Search ..." />
     <div *ngIf="submitted && f.searchString.errors" class="invalid-feedback">
       <div *ngIf="f.searchString.errors.required">Search String is required</div>
     </div>
   </div>
-
   <div class="form-group">
-    <button  class="btn btn-primary">Search</button>
+    <button class="btn btn-primary">Search</button>
   </div>
 </form>
-<p>
-  {{discusssionResult[0].question}}
-</p>
+<br>
+<!--Form for Category-->
+<form [formGroup]="searchCategoryForm" (ngSubmit)="onSubmitCategory()">
+  <div class="form-group">
+    <label for="searchString">Select Category: </label>
+    <select class="browser-default" formControlName="category">
+      <option *ngFor="let category of categories" [value]="category">{{category}}</option>
+    </select>
+  </div>
+  <br>
+  <div class="form-group">
+    <button class="btn btn-primary">Search</button>
+  </div>
+</form>
+<!--Display discussions-->
+<div *ngFor="let discussion of discusssionResult">
+  <div>
+    <p id="question"><b>Q: {{discussion.question}}</b></p>
+  </div>
+  Answers:
+  <div *ngFor="let answer of discussion.answer">
+    <p id="answer">A: {{answer.answerDescription}}</p>
+    <hr>
+  </div>
+  <form [formGroup]="answerForm" (ngSubmit)="onPostAnswer(discussion.questionId)">
+    <div class=" form-group">
+      <label for="answer">Please type here to answer this question</label>
+      <!-- Removed as validations not working for multiple forms
+      <input type="text" formControlName="answer" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.answer.errors }" />
+      <div *ngIf="submitted && f.answer.errors" class="invalid-feedback">
+        <div *ngIf="f.answer.errors.required">Type something to answer...</div>
+      </div>
+      -->
+      <input type="text" formControlName="answer" class="form-control" placeholder="Your Answer..."/>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-primary">Submit Answer</button>
+      </div>
+  </form>
+  <!--
+  <div>
+    <button class="btn btn-danger" style="cursor: pointer;" (click)="onPostAnswer(discussion.questionId)">Post Answer</button>
+  </div>
+  -->
+  <br>
+</div>
