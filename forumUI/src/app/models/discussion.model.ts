@@ -5,5 +5,5 @@ export class Discussion {
     userName: String;
     userId: number;
     timestamp: string;
-    answer = [];
+    answer : [];
 }

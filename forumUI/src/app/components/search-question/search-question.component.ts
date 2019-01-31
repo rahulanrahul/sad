@@ -12,6 +12,7 @@ import { ShowDiscussionsComponent } from '../show-discussions/show-discussions.c
 export class SearchQuestionComponent implements OnInit {
   searchStringForm: FormGroup;
   submitted = false;
+  discusssionResult: any[];
   constructor(private router:Router,
     private formBuilder: FormBuilder,
     private forumService : ForumService
@@ -36,8 +37,10 @@ export class SearchQuestionComponent implements OnInit {
     this.forumService.getDiscussionsSearchString(this.searchStringForm.get('searchString').value)
       .subscribe(
       data => {
-        this.router.navigate(['/show-discussion']);
-        console.log(data);
+        //this.router.navigate(['/show-discussion']);
+        //console.log(data[0].question);
+        this.discusssionResult=data;
+        console.log(this.discusssionResult)
         //showDiscussionsComponent(data)
       });
   }
