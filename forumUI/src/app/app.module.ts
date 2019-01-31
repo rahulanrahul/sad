@@ -21,6 +21,7 @@ import { MyprofileComponent } from './components/myprofile/myprofile.component';
 import { MyanswersComponent } from './components/myanswers/myanswers.component';
 import { EditprofileComponent } from './components/editprofile/editprofile.component';
 import { ForumService } from './services/forum.service';
+import { EditquestionComponent } from './components/editquestion/editquestion.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ForumService } from './services/forum.service';
     MyquestionsComponent,
     MyprofileComponent,
     MyanswersComponent,
-    EditprofileComponent
+    EditprofileComponent,
+    EditquestionComponent
   ],
   imports: [
     BrowserModule,

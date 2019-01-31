@@ -63,7 +63,7 @@ export class EditprofileComponent implements OnInit {
   }
 
   deleteAccount() {
-    this.userId = localStorage.getItem('currentUser');
+    //this.userId = localStorage.getItem('currentUser');
     this.userService.deleteUser(this.userId)
       .pipe(first())
       .subscribe(
@@ -83,7 +83,7 @@ export class EditprofileComponent implements OnInit {
       return;
     }
     this.loading = true;
-    this.userId = localStorage.getItem('currentUser');
+    //this.userId = localStorage.getItem('currentUser');
     this.userService.updateUser(this.userId, this.userForm.value)
       .pipe(first())
       .subscribe(

@@ -85,10 +85,9 @@ public class ForumDaoImpl implements ForumDao {
 	}
 
 	@Override
-	public void editQuestions(int questionId, Integer categoryId, String question) {
+	public void editQuestions(int questionId, String question) {
 		Session session = sessionFactory.getCurrentSession();
 		QuestionsEntity existingQuestionEntity = getQuestionEntity(questionId, session);
-		existingQuestionEntity.setQuestionCategoryId(categoryId);
 		existingQuestionEntity.setQuestionDescription(question);
 		session.update(existingQuestionEntity);
 	}

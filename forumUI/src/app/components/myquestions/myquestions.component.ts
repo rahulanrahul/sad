@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { ForumService } from '../../services/forum.service';
 import { AlertService } from '../../services/alert.service';
@@ -13,7 +14,8 @@ export class MyquestionsComponent implements OnInit {
   discussions: [];
   userId: any;
   constructor(private forumService: ForumService,
-    private alertService: AlertService) { }
+    private alertService: AlertService,
+    private router: Router) { }
 
   ngOnInit() {
     this.userId = localStorage.getItem('currentUser');
@@ -30,8 +32,11 @@ export class MyquestionsComponent implements OnInit {
       );
   }
 
-  onEdit(questionId: any) {
-    console.log(questionId);
+  onEdit(questionId: any, question: any) {
+    console.log(questionId, question)
+    localStorage.setItem('questionId', questionId);
+    localStorage.setItem('question', question);
+    this.router.navigate(['/editquestion']);
   }
 
   onClose(questionId: any) {
