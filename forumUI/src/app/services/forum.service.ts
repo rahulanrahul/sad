@@ -25,4 +25,9 @@ export class ForumService {
     const searchStringUrl = "//localhost:8080/forum/questions?searchString=";
     return this.http.get<any>(searchStringUrl + urlParameter);
   }
+
+  getDiscussionsByUserId(urlParameter: string): Observable<any> {
+    this.url = "//localhost:8080/forum/questions?userId=";
+    return this.http.get<any>(this.url + urlParameter);
+  }
 }
