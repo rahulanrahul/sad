@@ -13,7 +13,8 @@ import { AlertService } from '../../services/alert.service';
   styleUrls: ['./editprofile.component.css']
 })
 export class EditprofileComponent implements OnInit {
-
+  loading = false;
+  submitted = false;
   userId: any;
   userForm: FormGroup;
   firstName: any;
@@ -34,6 +35,8 @@ export class EditprofileComponent implements OnInit {
       phoneNumber: [{ value: '', disabled: this.isDisabled }, Validators.required],
     });
   }
+
+  get f() { return this.userForm.controls; }
 
   ngOnInit() {
     this.userId = localStorage.getItem('currentUser');
@@ -59,10 +62,10 @@ export class EditprofileComponent implements OnInit {
         });
   }
 
-  deleteAccount(){
+  deleteAccount() {
     this.userId = localStorage.getItem('currentUser');
     this.userService.deleteUser(this.userId)
-    .pipe(first())
+      .pipe(first())
       .subscribe(
         data => {
           this.alertService.success("Profile Deleted Successfully", true);
@@ -71,18 +74,25 @@ export class EditprofileComponent implements OnInit {
           return;
         });
     this.authenticationService.logout();
-  }  
+  }
 
   onSubmit() {
+    this.submitted = true;
+    if (this.userForm.invalid) {
+      return;
+    }
+    this.loading = true;
     this.userId = localStorage.getItem('currentUser');
     this.userService.updateUser(this.userId, this.userForm.value)
-    .pipe(first())
+      .pipe(first())
       .subscribe(
         data => {
           this.alertService.success("Profile Updated Successfully", true);
           this.router.navigate(['/myprofile']);
         },
         error => {
+          this.alertService.error("Profile Updation Failed");
+          this.loading = false;
           return;
         });
   }

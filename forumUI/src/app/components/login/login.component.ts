@@ -22,9 +22,9 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private authenticationService: AuthenticationService,
     private alertService: AlertService) {
-      if (this.authenticationService.currentUserValue) { 
-        console.log(this.authenticationService.currentUserValue);
-        this.router.navigate(['/dashboard']);
+    if (this.authenticationService.currentUserValue) {
+      console.log(this.authenticationService.currentUserValue);
+      this.router.navigate(['/dashboard']);
     }
   }
 
@@ -56,6 +56,7 @@ export class LoginComponent implements OnInit {
         error => {
           this.alertService.error("Invalid Username or Password");
           this.loading = false;
+          return;
         });
   }
 

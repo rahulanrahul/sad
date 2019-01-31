@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./postquestion.component.css']
 })
 export class PostquestionComponent implements OnInit {
+  loading = false;
   submitted = false;
   userId: any;
   postQuestionForm: FormGroup;
@@ -38,6 +39,7 @@ export class PostquestionComponent implements OnInit {
     if (this.postQuestionForm.invalid) {
       return;
     }
+    this.loading = true;
     this.forumService.postQuestion(this.postQuestionForm.value)
       .pipe(first())
       .subscribe(
@@ -48,6 +50,7 @@ export class PostquestionComponent implements OnInit {
         },
         error => {
           this.alertService.error("Posting Failed");
+          this.loading = false;
           return;
         });
   }
