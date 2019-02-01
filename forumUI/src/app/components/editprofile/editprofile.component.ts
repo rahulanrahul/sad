@@ -63,7 +63,7 @@ export class EditprofileComponent implements OnInit {
   }
 
   deleteAccount() {
-    this.userId = localStorage.getItem('currentUser');
+    //this.userId = localStorage.getItem('currentUser');
     this.userService.deleteUser(this.userId)
       .pipe(first())
       .subscribe(
@@ -71,6 +71,7 @@ export class EditprofileComponent implements OnInit {
           this.alertService.success("Profile Deleted Successfully", true);
         },
         error => {
+          this.alertService.error("Profile Deletion Failed");
           return;
         });
     this.authenticationService.logout();
@@ -82,7 +83,7 @@ export class EditprofileComponent implements OnInit {
       return;
     }
     this.loading = true;
-    this.userId = localStorage.getItem('currentUser');
+    //this.userId = localStorage.getItem('currentUser');
     this.userService.updateUser(this.userId, this.userForm.value)
       .pipe(first())
       .subscribe(

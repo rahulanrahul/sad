@@ -22,7 +22,7 @@ public interface ForumDao {
 
 	public List<DiscussionModel> searchOnUserId(Integer userId);
 
-	public void editQuestions(int questionId, Integer categoryId, String question);
+	public void editQuestions(int questionId, String question);
 
 	public void editAnswers(int questionId, String answer);
 

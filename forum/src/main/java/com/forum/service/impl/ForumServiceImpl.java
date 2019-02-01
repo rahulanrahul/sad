@@ -67,9 +67,8 @@ public class ForumServiceImpl implements ForumService {
 	@Override
 	public ResponseEntity<String> editQuestion(DiscussionModel questionModel) {
 		int questionId = questionModel.getQuestionId();
-		int questionCategory = categoryDao.getCategoryIdFromCategoryName(questionModel.getCategory());
 		String questionDescription = questionModel.getQuestion();
-		forumDao.editQuestions(questionId, questionCategory, questionDescription);
+		forumDao.editQuestions(questionId, questionDescription);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 

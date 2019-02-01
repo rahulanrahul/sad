@@ -10,6 +10,7 @@ import { MyprofileComponent } from './components/myprofile/myprofile.component';
 import { MyanswersComponent } from './components/myanswers/myanswers.component';
 import { MyquestionsComponent } from './components/myquestions/myquestions.component';
 import { EditprofileComponent } from './components/editprofile/editprofile.component';
+import { EditquestionComponent } from './components/editquestion/editquestion.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent, },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'search-question', component: SearchQuestionComponent },
   { path: 'show-discussion', component: ShowDiscussionsComponent},
   { path: 'editprofile', component: EditprofileComponent },
+  { path: 'editquestion', component: EditquestionComponent },
   // otherwise redirect to home
   { path: '**', redirectTo: '' }
 ];
