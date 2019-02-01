@@ -46,7 +46,6 @@ export class PostquestionComponent implements OnInit {
         data => {
           this.alertService.success('Question Posted successful', true);
           this.router.navigate(['/dashboard']);
-          console.log(data);
         },
         error => {
           this.alertService.error("Posting Failed");

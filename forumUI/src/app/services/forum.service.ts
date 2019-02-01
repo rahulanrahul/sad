@@ -56,7 +56,6 @@ export class ForumService {
     };
     this.url = "//localhost:8080/forum/questions/";
     this.url = this.url.concat(questionId.toString());
-    console.log(this.url);
     return this.http.put(this.url, question, updateQuestionHttpOptions);
   }
 

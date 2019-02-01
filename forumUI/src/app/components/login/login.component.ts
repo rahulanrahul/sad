@@ -18,12 +18,10 @@ export class LoginComponent implements OnInit {
   returnUrl: string;
 
   constructor(private formBuilder: FormBuilder,
-    private userService: UserService,
     private router: Router,
     private authenticationService: AuthenticationService,
     private alertService: AlertService) {
     if (this.authenticationService.currentUserValue) {
-      console.log(this.authenticationService.currentUserValue);
       this.router.navigate(['/dashboard']);
     }
   }
@@ -50,7 +48,6 @@ export class LoginComponent implements OnInit {
       .subscribe(
         data => {
           localStorage.setItem('currentUser', data.userId);
-          console.log(data.userId);
           this.router.navigate(['/dashboard']);
         },
         error => {

@@ -23,7 +23,6 @@ export class MyquestionsComponent implements OnInit {
       .subscribe(
         data => {
           this.discussions = data;
-          console.log(this.discussions);
         },
         error => {
           this.alertService.error("No Questions to Display");
@@ -33,7 +32,6 @@ export class MyquestionsComponent implements OnInit {
   }
 
   onEdit(questionId: any, question: any) {
-    console.log(questionId, question)
     localStorage.setItem('questionId', questionId);
     localStorage.setItem('question', question);
     this.router.navigate(['/editquestion']);
