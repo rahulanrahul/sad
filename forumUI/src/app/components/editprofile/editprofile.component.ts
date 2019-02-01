@@ -28,12 +28,6 @@ export class EditprofileComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private alertService: AlertService
   ) {
-    this.userForm = this.formBuilder.group({
-      firstName: [{ value: '', disabled: this.isDisabled }, Validators.required],
-      lastName: [{ value: '', disabled: this.isDisabled }, Validators.required],
-      emailId: [{ value: '', disabled: this.isDisabled }, Validators.required],
-      phoneNumber: [{ value: '', disabled: this.isDisabled }, Validators.required],
-    });
   }
 
   get f() { return this.userForm.controls; }
@@ -49,10 +43,10 @@ export class EditprofileComponent implements OnInit {
           this.emailId = data.emailId;
           this.phoneNumber = data.phoneNumber;
           this.userForm = this.formBuilder.group({
-            firstName: [this.firstName],
-            lastName: [this.lastName],
-            emailId: [this.emailId],
-            phoneNumber: [this.phoneNumber],
+            firstName: [{ value: this.firstName, disabled: this.isDisabled }, Validators.required],
+            lastName: [{ value: this.lastName, disabled: this.isDisabled }, Validators.required],
+            emailId: [{ value: this.emailId, disabled: this.isDisabled }, Validators.required],
+            phoneNumber: [{ value: this.phoneNumber, disabled: this.isDisabled }, Validators.required],
           });
         },
         error => {

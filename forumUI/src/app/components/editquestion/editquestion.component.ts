@@ -20,10 +20,6 @@ export class EditquestionComponent implements OnInit {
     private forumService: ForumService,
     private router: Router,
     private alertService: AlertService) {
-    this.editQuestionForm = this.formBuilder.group({
-      question: ['', Validators.required],
-      questionId: [''],
-    });
   }
 
   get f() { return this.editQuestionForm.controls; }
@@ -32,7 +28,7 @@ export class EditquestionComponent implements OnInit {
     this.questionId = localStorage.getItem('questionId');
     this.questionDesc = localStorage.getItem('question');
     this.editQuestionForm = this.formBuilder.group({
-      question: [this.questionDesc],
+      question: [this.questionDesc, Validators.required],
       questionId: [this.questionId],
     });
 
