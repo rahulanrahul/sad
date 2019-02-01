@@ -27,7 +27,7 @@
     <button class="btn btn-primary">Search</button>
   </div>
 </form>
-<!--Display discussions-->
+<!--Form to Display discussions-->
 <div *ngFor="let discussion of discusssionResult">
   <div>
     <p id="question"><b>Q: {{discussion.question}}</b></p>
@@ -37,25 +37,17 @@
     <p id="answer">A: {{answer.answerDescription}}</p>
     <hr>
   </div>
-  <form [formGroup]="answerForm" (ngSubmit)="onPostAnswer(discussion.questionId)">
+  <div *ngIf="!discussion.discussionThreadActive">
+    <p><i>Question thread is disabled for this question. You can't give answer to this question !</i></p>
+  </div>
+  <form *ngIf="discussion.discussionThreadActive"[formGroup]="answerForm" (ngSubmit)="onPostAnswer(discussion.questionId)">
     <div class=" form-group">
       <label for="answer">Please type here to answer this question</label>
-      <!-- Removed as validations not working for multiple forms
-      <input type="text" formControlName="answer" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.answer.errors }" />
-      <div *ngIf="submitted && f.answer.errors" class="invalid-feedback">
-        <div *ngIf="f.answer.errors.required">Type something to answer...</div>
-      </div>
-      -->
       <input type="text" formControlName="answer" class="form-control" placeholder="Your Answer..."/>
     </div>
     <div class="form-group">
         <button class="btn btn-primary">Submit Answer</button>
       </div>
   </form>
-  <!--
-  <div>
-    <button class="btn btn-danger" style="cursor: pointer;" (click)="onPostAnswer(discussion.questionId)">Post Answer</button>
-  </div>
-  -->
   <br>
 </div>

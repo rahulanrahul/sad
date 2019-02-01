@@ -59,4 +59,9 @@ export class ForumService {
     console.log(this.url);
     return this.http.put(this.url, question, updateQuestionHttpOptions);
   }
+
+  postAnswer(answer:any): Observable<any> {
+    this.url = "//localhost:8080/forum/answers";
+    return this.http.post(this.url, answer, HttpOptions);
+  }
 }

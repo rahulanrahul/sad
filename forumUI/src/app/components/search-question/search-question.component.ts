@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ForumService } from '../../services/forum.service';
 import { AlertService } from '../../services/alert.service';
 import { first } from 'rxjs/operators';
+import { Answer} from '../../models/answer.model'
 
 
 @Component({
@@ -15,11 +16,7 @@ export class SearchQuestionComponent implements OnInit {
   searchStringForm: FormGroup;
   searchCategoryForm: FormGroup;
   answerForm:FormGroup;
-  answer:{
-    userId:number,
-    questionId:number,
-    answer:string
-  };
+  answerModel:Answer
   userId: any;
   submitted = false;
   submittedCategory = false;
@@ -37,7 +34,9 @@ export class SearchQuestionComponent implements OnInit {
         category: ['Food'] 
       });
       this.answerForm = this.formBuilder.group({
-        answer: ['',Validators.required] 
+        answer: ['',Validators.required] ,
+        userId: [this.userId],
+        questionId:0
       });
     }
   
@@ -79,8 +78,25 @@ export class SearchQuestionComponent implements OnInit {
   onPostAnswer(questionId:any){
     if (this.searchCategoryForm.invalid) {
       return;
-    }
+    };
     console.log(questionId,this.userId,this.answerForm.get('answer').value);
-
+    this.answerModel={
+      answer:this.answerForm.get('answer').value,
+      questionId:questionId,
+      userId:this.userId
+    };
+    this.forumService.postAnswer(this.answerModel)
+    .pipe(first())
+    .subscribe(
+      data=>{
+        this.alertService.success('Answer added in system successfully')
+        console.log(data)
+      },
+      error => {
+        this.alertService.error("Answer not added");
+        //this.loading = false;
+        return;
+      }
+    )
   }
 }
