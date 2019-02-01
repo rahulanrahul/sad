@@ -44,7 +44,6 @@ export class EditprofileComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          console.log(data);
           this.firstName = data.firstName;
           this.lastName = data.lastName;
           this.emailId = data.emailId;
@@ -57,13 +56,12 @@ export class EditprofileComponent implements OnInit {
           });
         },
         error => {
-          console.log(error);
+          this.alertService.error("User Not Found");
           return;
         });
   }
 
   deleteAccount() {
-    //this.userId = localStorage.getItem('currentUser');
     this.userService.deleteUser(this.userId)
       .pipe(first())
       .subscribe(
@@ -83,7 +81,6 @@ export class EditprofileComponent implements OnInit {
       return;
     }
     this.loading = true;
-    //this.userId = localStorage.getItem('currentUser');
     this.userService.updateUser(this.userId, this.userForm.value)
       .pipe(first())
       .subscribe(

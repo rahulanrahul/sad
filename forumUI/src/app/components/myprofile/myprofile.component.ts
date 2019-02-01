@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-myprofile',
@@ -18,8 +19,9 @@ export class MyprofileComponent implements OnInit {
   phoneNumber: any;
   isDisabled: boolean = true;
   constructor(private userSerive: UserService,
-              private formBuilder: FormBuilder,
-              private router: Router
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private alertService: AlertService
   ) {
     this.userForm = this.formBuilder.group({
       firstName: [{ value: '', disabled: this.isDisabled }, Validators.required],
@@ -35,7 +37,6 @@ export class MyprofileComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          console.log(data);
           this.firstName = data.firstName;
           this.lastName = data.lastName;
           this.emailId = data.emailId;
@@ -48,7 +49,7 @@ export class MyprofileComponent implements OnInit {
           });
         },
         error => {
-          console.log(error);
+          this.alertService.error("User Not Found");
           return;
         });
   }

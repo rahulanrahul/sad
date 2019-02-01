@@ -17,15 +17,12 @@ export class AppComponent {
     private authenticationService: AuthenticationService
   ) {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
-    console.log(this.currentUser);
     if (!this.currentUser) {
-      console.log(this.currentUser);
       this.router.navigate(['/login']);
     }
   }
 
   logout() {
-    this.currentUser = "";
     this.authenticationService.logout();
   }
 }
