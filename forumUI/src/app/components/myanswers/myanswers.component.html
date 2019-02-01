@@ -1,3 +1,18 @@
-<p>
-  myanswers works!
-</p>
+<h2>My Answers</h2>
+<div *ngFor="let discussion of discussions">
+  <div>
+    <p id="question"><b>Question: {{discussion.question}}</b></p>
+  </div>
+  Answers:
+  <div *ngFor="let answer of discussion.answer">
+    <p id="answer">My Answer: {{answer.answerDescription}}</p>
+    <div class="buttons">
+        <br>
+        <button class="btn btn-danger" style="cursor: pointer;" (click)="onEdit(answer.answerId, answer.answerDescription)">Edit
+          Answer</button>
+        &nbsp;
+        <button class="btn btn-danger" style="cursor: pointer;" (click)="onDelete(answer.answerId)">Delete Answer</button>
+      </div>    
+  </div>
+  <br><br>
+</div>

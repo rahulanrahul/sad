@@ -64,4 +64,15 @@ export class ForumService {
     this.url = "//localhost:8080/forum/answers";
     return this.http.post(this.url, answer, HttpOptions);
   }
+
+  getAnswersByUserId(urlParameter: string): Observable<any> {
+    this.url = "//localhost:8080/forum/answers?userId=";
+    return this.http.get<any>(this.url + urlParameter);
+  }
+
+  deleteAnswer(answerId: number): Observable<any> {
+    this.url = "//localhost:8080/forum/answers/";
+    this.url = this.url.concat(answerId.toString());
+    return this.http.delete(this.url, HttpOptions);
+  }
 }
