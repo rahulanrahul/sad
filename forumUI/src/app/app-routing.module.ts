@@ -11,7 +11,7 @@ import { MyanswersComponent } from './components/myanswers/myanswers.component';
 import { MyquestionsComponent } from './components/myquestions/myquestions.component';
 import { EditprofileComponent } from './components/editprofile/editprofile.component';
 import { EditquestionComponent } from './components/editquestion/editquestion.component';
-
+import { EditanswersComponent } from './components/editanswers/editanswers.component';
 const routes: Routes = [
   { path: '', component: LoginComponent, },
   { path: 'login', component: LoginComponent },
@@ -25,6 +25,7 @@ const routes: Routes = [
   { path: 'show-discussion', component: ShowDiscussionsComponent},
   { path: 'editprofile', component: EditprofileComponent },
   { path: 'editquestion', component: EditquestionComponent },
+  { path: 'editanswers', component: EditanswersComponent },
   // otherwise redirect to home
   { path: '**', redirectTo: '' }
 ];

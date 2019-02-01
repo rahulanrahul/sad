@@ -50,4 +50,8 @@ export class MyanswersComponent implements OnInit {
         });
   }
 
+  onEdit(answerId: any) {
+    localStorage.setItem('answerId', answerId);
+    this.router.navigate(['/editanswers']);
+  }
 }

@@ -22,6 +22,7 @@ import { MyanswersComponent } from './components/myanswers/myanswers.component';
 import { EditprofileComponent } from './components/editprofile/editprofile.component';
 import { ForumService } from './services/forum.service';
 import { EditquestionComponent } from './components/editquestion/editquestion.component';
+import { EditanswersComponent } from './components/editanswers/editanswers.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { EditquestionComponent } from './components/editquestion/editquestion.co
     MyprofileComponent,
     MyanswersComponent,
     EditprofileComponent,
-    EditquestionComponent
+    EditquestionComponent,
+    EditanswersComponent
   ],
   imports: [
     BrowserModule,

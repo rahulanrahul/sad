@@ -74,4 +74,16 @@ export class ForumService {
     this.url = this.url.concat(answerId.toString());
     return this.http.delete(this.url, HttpOptions);
   }
+
+  updateAnswer(answerId: number, answer: any): Observable<any> {
+    let params = new HttpParams().set("answerId", answerId.toString());
+    const updateAnswerHttpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      params: params,
+    };
+    this.url = "//localhost:8080/forum/answers/";
+    this.url = this.url.concat(answerId.toString());
+    console.log(this.url);
+    return this.http.put(this.url, answer, updateAnswerHttpOptions);
+  }
 }
