@@ -48,6 +48,8 @@ export class SearchQuestionComponent implements OnInit {
 
   get f() { return this.searchStringForm.controls; }
 
+  get fanswer() { return this.answerForm.controls; }
+
   onSubmitSearchString(){
     this.submitted = true;
 
@@ -76,9 +78,10 @@ export class SearchQuestionComponent implements OnInit {
   }
 
   onPostAnswer(questionId:any){
-    if (this.searchCategoryForm.invalid) {
+    this.submitted = true;
+    if (this.answerForm.invalid) {
       return;
-    };
+    }
     console.log(questionId,this.userId,this.answerForm.get('answer').value);
     this.answerModel={
       answer:this.answerForm.get('answer').value,

@@ -18,6 +18,10 @@
       <br>
       <button class="btn btn-danger" style="cursor: pointer;" (click)="onClose(discussion.questionId)">Close Discussion</button>
     </div>
+    <div *ngIf="!discussion.discussionThreadActive">
+        <br>
+        <button class="btn btn-danger" [disabled]="true" style="cursor: pointer;" (click)="onClose(discussion.questionId)">Discussion Closed</button>
+      </div>
   </div>
   <br><br>
 </div>

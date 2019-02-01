@@ -43,7 +43,10 @@
   <form *ngIf="discussion.discussionThreadActive"[formGroup]="answerForm" (ngSubmit)="onPostAnswer(discussion.questionId)">
     <div class=" form-group">
       <label for="answer">Please type here to answer this question</label>
-      <input type="text" formControlName="answer" class="form-control" placeholder="Your Answer..."/>
+      <input type="text" formControlName="answer" class="form-control" placeholder="Your Answer..." [ngClass]="{ 'is-invalid': submitted && fanswer.answer.errors }"/>
+      <div *ngIf="submitted && fanswer.answer.errors" class="invalid-feedback">
+          <div *ngIf="fanswer.answer.errors.required">Answer Text cannot be Empty</div>
+        </div>
     </div>
     <div class="form-group">
         <button class="btn btn-primary">Submit Answer</button>
