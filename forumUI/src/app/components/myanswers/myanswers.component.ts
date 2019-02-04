@@ -25,7 +25,6 @@ export class MyanswersComponent implements OnInit {
       .subscribe(
         data => {
           this.discussions = data;
-          console.log(this.discussions);
         },
         error => {
           this.alertService.error("No Answers to Display");
@@ -50,8 +49,9 @@ export class MyanswersComponent implements OnInit {
         });
   }
 
-  onEdit(answerId: any) {
+  onEdit(answerId: any,answerDesc: string) {
     localStorage.setItem('answerId', answerId);
+    localStorage.setItem('answerDesc', answerDesc);
     this.router.navigate(['/editanswers']);
   }
 }

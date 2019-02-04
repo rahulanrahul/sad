@@ -64,7 +64,6 @@ export class SearchQuestionComponent implements OnInit {
       });
   }
   onSubmitCategory(){
-    //this.submittedCategory = true;
 
     if (this.searchCategoryForm.invalid) {
       return;
@@ -74,7 +73,6 @@ export class SearchQuestionComponent implements OnInit {
       data => {
         this.discusssionResult=data;
       });
-   console.log(this.searchCategoryForm.get('category').value)
   }
 
   onPostAnswer(questionId:any){
@@ -92,12 +90,11 @@ export class SearchQuestionComponent implements OnInit {
     .pipe(first())
     .subscribe(
       data=>{
-        this.alertService.success('Answer added in system successfully')
-        console.log(data)
+        this.alertService.success('Answer added in system successfully');
+        this.ngOnInit();
       },
       error => {
         this.alertService.error("Answer not added");
-        //this.loading = false;
         return;
       }
     )

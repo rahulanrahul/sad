@@ -5,7 +5,6 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PostquestionComponent } from './components/postquestion/postquestion.component';
 import { SearchQuestionComponent } from './components/search-question/search-question.component';
-import { ShowDiscussionsComponent } from './components/show-discussions/show-discussions.component';
 import { MyprofileComponent } from './components/myprofile/myprofile.component';
 import { MyanswersComponent } from './components/myanswers/myanswers.component';
 import { MyquestionsComponent } from './components/myquestions/myquestions.component';
@@ -22,7 +21,6 @@ const routes: Routes = [
   { path: 'myquestions', component: MyquestionsComponent },
   { path: 'postquestion', component: PostquestionComponent },
   { path: 'search-question', component: SearchQuestionComponent },
-  { path: 'show-discussion', component: ShowDiscussionsComponent},
   { path: 'editprofile', component: EditprofileComponent },
   { path: 'editquestion', component: EditquestionComponent },
   { path: 'editanswers', component: EditanswersComponent },
