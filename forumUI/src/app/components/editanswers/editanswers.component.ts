@@ -14,23 +14,21 @@ export class EditanswersComponent implements OnInit {
   loading = false;
   submitted = false;
   answerId: any;
+  answerDesc: string;
   editAnswerForm: FormGroup;
   constructor(private formBuilder: FormBuilder,
     private forumService: ForumService,
     private router: Router,
     private alertService: AlertService) {
-    this.editAnswerForm = this.formBuilder.group({
-      answer: ['', Validators.required],
-      answerId: [this.answerId],
-    });
   }
   
   get f() { return this.editAnswerForm.controls; }
 
   ngOnInit() {
     this.answerId = localStorage.getItem('answerId');
+    this.answerDesc = localStorage.getItem('answerDesc');
     this.editAnswerForm = this.formBuilder.group({
-      answer: ['', Validators.required],
+      answer: [this.answerDesc, Validators.required],
       answerId: [this.answerId],
     });
   }
