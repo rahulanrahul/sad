@@ -1,7 +1,7 @@
 <h2>My Questions</h2>
 <div *ngFor="let discussion of discussions">
   <div>
-    <p id="question"><b>{{discussion.question}}</b></p>
+    <p id="question"><b>Question: {{discussion.question}}</b></p>
   </div>
   Answers:
   <div *ngFor="let answer of discussion.answer">

@@ -15,12 +15,12 @@ import { AlertService } from '../../services/alert.service';
 export class EditprofileComponent implements OnInit {
   loading = false;
   submitted = false;
-  userId: any;
+  userId: string;
   userForm: FormGroup;
-  firstName: any;
-  lastName: any;
-  emailId: any;
-  phoneNumber: any;
+  firstName: string;
+  lastName: string;
+  emailId: string;
+  phoneNumber: string;
   isDisabled: boolean = false;
   constructor(private userService: UserService,
     private formBuilder: FormBuilder,
@@ -28,6 +28,12 @@ export class EditprofileComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private alertService: AlertService
   ) {
+    this.userForm = this.formBuilder.group({
+      firstName: [{ value: '', disabled: this.isDisabled }, Validators.required],
+      lastName: [{ value: '', disabled: this.isDisabled }, Validators.required],
+      emailId: [{ value: '', disabled: this.isDisabled }, Validators.required],
+      phoneNumber: [{ value: '', disabled: this.isDisabled }, Validators.required],
+    });
   }
 
   get f() { return this.userForm.controls; }

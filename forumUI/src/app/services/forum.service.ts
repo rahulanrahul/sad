@@ -36,20 +36,20 @@ export class ForumService {
     return this.http.get<any>(this.url + urlParameter);
   }
 
-  deleteQuestion(questionId: number): Observable<any> {
+  deleteQuestion(questionId: string): Observable<any> {
     this.url = "//localhost:8080/forum/questions/";
     this.url = this.url.concat(questionId.toString());
     return this.http.delete(this.url, HttpOptions);
   }
 
-  closeQuestion(questionId: number): Observable<any> {
+  closeQuestion(questionId: string): Observable<any> {
     this.url = "//localhost:8080/forum/questions/close-thread/";
-    this.url = this.url.concat(questionId.toString());
+    this.url = this.url.concat(questionId);
     return this.http.put(this.url, HttpOptions);
   }
 
-  updateQuestion(questionId: number, question: any): Observable<any> {
-    let params = new HttpParams().set("questionId", questionId.toString());
+  updateQuestion(questionId: string, question: string): Observable<any> {
+    let params = new HttpParams().set("questionId", questionId);
     const updateQuestionHttpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       params: params,

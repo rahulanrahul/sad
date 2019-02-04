@@ -13,8 +13,8 @@ import { AlertService } from '../../services/alert.service';
 export class EditquestionComponent implements OnInit {
   loading = false;
   submitted = false;
-  questionId: any;
-  questionDesc: any;
+  questionId: string;
+  questionDesc: string;
   editQuestionForm: FormGroup;
   constructor(private formBuilder: FormBuilder,
     private forumService: ForumService,

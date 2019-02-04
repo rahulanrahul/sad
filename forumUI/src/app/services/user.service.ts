@@ -19,26 +19,26 @@ export class UserService {
     return this.http.post(this.url, user, HttpOptions);
   }
 
-  getUser(userId: number): Observable<any> {
+  getUser(userId: string): Observable<any> {
     this.url = "//localhost:8080/users/";
-    this.url = this.url.concat(userId.toString());
+    this.url = this.url.concat(userId);
     return this.http.get(this.url, HttpOptions);
   }
 
-  updateUser(userId: number, user: User): Observable<any> {
-    let params = new HttpParams().set("userId", userId.toString());
+  updateUser(userId: string, user: User): Observable<any> {
+    let params = new HttpParams().set("userId", userId);
     const updateUserHttpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       params: params,
     };
     this.url = "//localhost:8080/users/";
-    this.url = this.url.concat(userId.toString());
+    this.url = this.url.concat(userId);
     return this.http.put(this.url, user, updateUserHttpOptions);
   }
 
-  deleteUser(userId: number): Observable<any> {
+  deleteUser(userId: string): Observable<any> {
     this.url = "//localhost:8080/users/";
-    this.url = this.url.concat(userId.toString());
+    this.url = this.url.concat(userId);
     return this.http.delete(this.url, HttpOptions);
   }
 }
